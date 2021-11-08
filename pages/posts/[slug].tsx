@@ -11,6 +11,9 @@ import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import PostType from '../../types/post'
+import { serialize } from 'next-mdx-remote/serialize'
+import prism from "remark-prism";
+import rehypePrism from '@mapbox/rehype-prism';
 
 type Props = {
   post: PostType
@@ -44,7 +47,7 @@ const Post = ({ post, morePosts, preview }: Props) => {
                 date={post.date}
                 author={post.author}
               />
-              <PostBody content={post.content} />
+              <PostBody source={post.content} />
             </article>
           </>
         )}
@@ -71,13 +74,20 @@ export async function getStaticProps({ params }: Params) {
     'ogImage',
     'coverImage',
   ])
-  const content = await markdownToHtml(post.content || '')
+
+  const rawContent = post.content || ''
+  const content = await serialize(post.content, {
+    mdxOptions: {
+      remarkPlugins: [rehypePrism],
+    },
+  })
 
   return {
     props: {
       post: {
         ...post,
         content,
+        rawContent,
       },
     },
   }
