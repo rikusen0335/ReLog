@@ -12,8 +12,9 @@ import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import PostType from '../../types/post'
 import { serialize } from 'next-mdx-remote/serialize'
-import prism from "remark-prism";
-import rehypePrism from '@mapbox/rehype-prism';
+import remarkPrism from "remark-prism";
+import remarkBreaks from 'remark-breaks';
+import remarkHint from 'remark-hint';
 
 type Props = {
   post: PostType
@@ -78,7 +79,11 @@ export async function getStaticProps({ params }: Params) {
   const rawContent = post.content || ''
   const content = await serialize(post.content, {
     mdxOptions: {
-      remarkPlugins: [rehypePrism],
+      remarkPlugins: [
+        remarkHint,
+        remarkPrism,
+        remarkBreaks,
+      ],
     },
   })
 
