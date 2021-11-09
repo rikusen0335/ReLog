@@ -15,6 +15,10 @@ import { serialize } from 'next-mdx-remote/serialize'
 import remarkPrism from "remark-prism";
 import remarkBreaks from 'remark-breaks';
 import remarkHint from 'remark-hint';
+import remarkRehype from "remark-rehype";
+import rehypePrismPlus from "rehype-prism-plus";
+import rehypeSlug from "rehype-slug";
+import rehypeShiki from "@leafac/rehype-shiki";
 
 type Props = {
   post: PostType
@@ -81,9 +85,12 @@ export async function getStaticProps({ params }: Params) {
     mdxOptions: {
       remarkPlugins: [
         remarkHint,
-        remarkPrism,
         remarkBreaks,
       ],
+      rehypePlugins: [
+        rehypePrismPlus,
+        rehypeSlug,
+      ]
     },
   })
 
