@@ -29,7 +29,8 @@ Atomic Designとは、科学の「原子」をもとに考えられた概念で�
 
 ここで、以下のようなコンポーネントを用意してみる。
 
-```tsx:test.mdx {1} showLineNumbers
+```tsx:test.mdx {1-4} showLineNumbers
+// Props are always good to define
 type Props = {
   imageUrl: string;
 }
@@ -43,11 +44,11 @@ const Avatar: VFC<Props> = ({ imageUrl }) => {
 
 彼らは事実現にその努力論というのの中が含まませない。
 
-```tsx {1} showLineNumbers
+```tsx {4} showLineNumbers
 const Component: VFC<Props> = ({ children }) => {
   return (
     <Hoge>
-      <Foo />
+      <Foo /> {/* Change this component to <Bar /> */}
     </Hoge>
   )
 }
