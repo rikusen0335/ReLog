@@ -133,10 +133,6 @@ export async function getStaticProps({ params }: Params) {
     }
   )
 
-  // const a = await bundleMDX(`![Game Screenshot](./image_1.jpg 'The Cycle')`)
-
-  // console.log(a)
-
   return {
     props: {
       post: {
