@@ -13,14 +13,42 @@
 /* Stop purging. */
 
 /* Your own custom utilities */
+html {
+    font-family: Neue, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Hiragino Sans, Hiragino Kaku Gothic ProN, BIZ UDPGothic, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",  Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+}
+
+.hint {
+    @apply px-4 py-4 border-l-[3px] rounded-r text-gray-800
+}
 .hint.tip {
-    @apply px-4 py-4 border-blue-200 border rounded bg-blue-100 text-gray-600
+    @apply border-blue-300 bg-blue-100
 }
 
 .hint.warn {
-    @apply px-4 py-4 border-yellow-200 border rounded bg-yellow-100 text-gray-600
+    @apply border-yellow-200 bg-yellow-100
 }
 
 .hint.error {
-    @apply px-4 py-4 border-red-200 border rounded bg-red-100 text-gray-600
+    @apply border-red-200 bg-red-100
+}
+
+.rehype-code-title {
+    font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+    @apply pt-2 px-4 bg-[#011627] text-white
+}
+
+/*
+ * 若干ハックっぽい
+ * inlineCodeでハイライトできないので、preタグに入ってないcodeに対してのみスタイルを適用する
+ */
+:not(pre) > code {
+    @apply text-blue-500 border border-gray-300 rounded bg-gray-50 py-[2px] px-1 mx-1
+}
+
+li::marker {
+    @apply text-gray-500
+}
+
+.markdown blockquote > p {
+    @apply mb-0
 }

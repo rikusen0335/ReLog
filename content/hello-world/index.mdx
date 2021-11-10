@@ -1,5 +1,5 @@
 ---
-title: 'Learn How to Pre-render Pages Using Static Generation with Next.js'
+title: 'うおおおおおおおおブログだろうがテストはいれるぞ'
 excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.'
 coverImage: '/assets/blog/hello-world/cover.jpg'
 date: '2020-03-16T05:35:07.322Z'
@@ -8,18 +8,42 @@ author:
   picture: '/assets/blog/authors/rikusen.png'
 ogImage:
   url: '/assets/blog/hello-world/cover.jpg'
+tags:
+  - test
+  - hoge
 ---
 
 
-# 概要
-## その他
-### さらに
+Reactには、いくつかの、デファクトスタンダードとなっているコンポーネントデザインパターンが存在する。
+その一つが、Atomic Design。
 
-## But again
+Atomic Designとは、科学の「原子」をもとに考えられた概念で、コンポーネントごとに
+
+- Atom (原子)
+- Molecule (分子)
+- Organism (有機体)
+- Template
+- Page
+
+のように分けられる。
+
+ここで、以下のようなコンポーネントを用意してみる。
+
+```tsx:test.mdx {1} showLineNumbers
+type Props = {
+  imageUrl: string;
+}
+
+const Avatar: VFC<Props> = ({ imageUrl }) => {
+  return <img src={imageUrl} alt="アバター" />
+}
+```
+
+# 良い設計とは
 
 彼らは事実現にその努力論というのの中が含まませない。
 
-```jsx showLineNumbers
+```tsx {1} showLineNumbers
 const Component: VFC<Props> = ({ children }) => {
   return (
     <Hoge>
@@ -29,11 +53,44 @@ const Component: VFC<Props> = ({ children }) => {
 }
 ```
 
-!> TypeScriptを使用する際にも、必ずstrictを使用する必要はありません。
+`インラインコード`
+
+
+
+!> TypeScriptを使用する際にも、必ず`strict`を使用する必要はありません。
 
 ?> これはちょっと注意かも？
 
 x> これはダメです
+
+## Atomic Design
+
+Atom、**Molecule**、_Organism_、~~Template~~、Page
+
+## ReAtomic Design
+Atom、Component、Template、Page
+
+## Domain-oriented Design
+Small、Medium、Layout、Component、Page、Domain
+
+---
+> テスト引用
+
+> とは言わない
+>> とも言っていない
+>>> わけでもない
+
+1. それはそう
+2. それは違う
+
+画像をimportする↓
+![Game Screenshot](image_1.jpg 'The Cycle')
+
+| オプション | 説明         |
+| -------- | ----------- |
+| data     | path to data files to supply the data that will be passed into templates. |
+| engine   | engine to be used for processing templates. Handlebars is the default. |
+| ext      | extension to be used for dest files. |
 
 同時に昔を独立違いは無論その賞翫なくだろなりを堪てならですには乱暴なるですないから、ちょっとにもきまらんでだなかっ。
 自分がきまっですものはおもに十月がとうとううました。とやかく槙さんを仕事本領ちょっと汚辱にしよた釣その平気私か乱暴がというお発見ませたたないて、こういう事実はここか学校高圧をしが、岡田さんののを主義の私にけっしてお参考となろて私賞にご留学にいうようにどうかご発展に入っなましのに、もっとももっとも堕落より願っまして得るな方が書いたない。

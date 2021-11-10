@@ -3,19 +3,24 @@ import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import PostTitle from './post-title'
 import Author from '../types/author'
+import Tag from './tag'
 
 type Props = {
   title: string
   coverImage: string
   date: string
   author: Author
+  tags?: string[]
 }
 
-const PostHeader = ({ title, coverImage, date, author }: Props) => {
+const PostHeader = ({ title, coverImage, date, author, tags }: Props) => {
   return (
     <>
       <PostTitle>{title}</PostTitle>
-      <div className="hidden md:block md:mb-12">
+      <div className="flex items-center mb-4 space-x-4">
+        {tags?.map(t => <Tag key={t} name={t} />)}
+      </div>
+      <div className="hidden pl-5 border-l-2 border-black md:block md:mb-12">
         <div className="mb-4">
           <Avatar name={author.name} picture={author.picture} />
         </div>

@@ -10,7 +10,8 @@ type PostType = {
   ogImage: {
     url: string
   }
-  content: string
+  tags?: string[]
+  content: object // TODO: とりあえず
   rawContent: string;
 }
 
