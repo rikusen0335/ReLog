@@ -13,7 +13,7 @@ import PostType from '../../types/post'
 import { bundleMDX } from 'mdx-bundler'
 import { resolve } from 'path'
 import remarkBreaks from 'remark-breaks';
-import remarkHint from 'remark-hint';
+const remarkHint = require('remark-hint'); // TODO: あとでremark-directiveで置き換える
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import rehypeShiki from "@leafac/rehype-shiki";
@@ -23,7 +23,6 @@ import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 import { remarkMdxImages } from "remark-mdx-images";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { getJSDocTags } from 'typescript'
 
 
 type Props = {

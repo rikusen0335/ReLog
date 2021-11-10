@@ -1,4 +1,5 @@
 import Author from './author'
+import { BundleMDXReturn } from './bundleMDX'
 
 type PostType = {
   slug: string
@@ -11,7 +12,7 @@ type PostType = {
     url: string
   }
   tags?: string[]
-  content: object // TODO: とりあえず
+  content: BundleMDXReturn // TODO: とりあえず
   rawContent: string;
 }
 
