@@ -36,7 +36,6 @@ const Meta = () => {
         name="description"
         content={`Not a worth blog to take a look.`}
       />
-      <meta property="og:image" content={HOME_OG_IMAGE_URL} />
     </Head>
   )
 }

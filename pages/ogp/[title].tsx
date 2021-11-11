@@ -132,8 +132,8 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async (cont
 
       <body>
         <div class="container">
-          <div class="title">新しいMinecraft Launcherへの引っ越し方法について</div>
-          <p class="site-name">// ReLog</p>
+          <div class="title">${title}</div>
+          <p class="site-name">${COOL_SITE_NAME}</p>
         </div>
       </body>
     </html>`
