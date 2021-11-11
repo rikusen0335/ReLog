@@ -115,7 +115,6 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async (cont
             font-family:
               system-ui,
               -apple-system,
-              /* Firefox supports this but not yet `system-ui` */
               'Segoe UI',
               Roboto,
               Helvetica,
