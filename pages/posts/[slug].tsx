@@ -53,6 +53,18 @@ const Post = ({ post, morePosts, preview }: Props) => {
                   {post.title} | {SITE_NAME}
                 </title>
                 <meta
+                  property="og:title"
+                  content={post.title}
+                />
+                <meta
+                  property="twitter:title"
+                  content={post.title}
+                />
+                <meta
+                  property="twitter:text:title"
+                  content={post.title}
+                />
+                <meta
                   property="og:image"
                   key="ogImage"
                   content={post.ogImage.url}
