@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+<!-- This is temporal html file to develop ogp image in local. -->
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      width: 1200px;
+      height: 675px;
+      max-width: 1200px;
+      max-height: 675px;
+      background-color: #f9fafb;
+      border: 1px solid gray;
+
+      --bg-color: hsl(256, 33, 10);
+      --dot-color: hsl(256, 33, 70);
+
+      --dot-size: 1px;
+      --dot-space: 22px;
+
+      /*background:
+            linear-gradient(90deg, var(--bg-color) (var(--dot-space) - var(--dot-size)), transparent 1%) center,
+            linear-gradient(var(--bg-color) (var(--dot-space) - var(--dot-size)), transparent 1%) center,
+            var(--dot-color);
+          background-size: var(--dot-space) var(--dot-space);*/
+
+      background: linear-gradient(90deg, #fff 21px, transparent 4%) center, linear-gradient(#fff 21px, transparent 4%) center, #a799cc;
+      background-size: 22px 22px;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 80%;
+      height: 100%;
+      margin: auto;
+      color: #273141;
+      font-size: 60px;
+      font-weight: bold;
+      line-height: 1.5;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .site-name {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      color: #111;
+      font-family:
+        system-ui,
+        -apple-system,
+        /* Firefox supports this but not yet `system-ui` */
+        'Segoe UI',
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji';
+      font-weight: bold;
+      font-size: 50px;
+      margin-top: auto;
+      margin-bottom: 20px;
+      margin-right: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">新しいMinecraft Launcherへの引っ越し方法について</div>
+    <p class="site-name">// ReLog</p>
+  </div>
+</body>
+
+</html>
