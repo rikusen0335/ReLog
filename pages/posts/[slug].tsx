@@ -16,14 +16,13 @@ import remarkBreaks from 'remark-breaks';
 const remarkHint = require('remark-hint'); // TODO: あとでremark-directiveで置き換える
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
-import rehypeShiki from "@leafac/rehype-shiki";
+// import rehypeShiki from "@leafac/rehype-shiki";
 import remarkGfm from 'remark-gfm'
 import remarkDirective from 'remark-directive'
 import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 import { remarkMdxImages } from "remark-mdx-images";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 
 
 type Props = {
