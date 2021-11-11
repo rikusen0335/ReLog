@@ -5,7 +5,7 @@ import Intro from '../components/intro'
 import Layout from '../components/layout'
 import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
-import { CMS_NAME, SITE_NAME } from '../lib/constants'
+import { SITE_NAME } from '../lib/constants'
 import Post from '../types/post'
 
 type Props = {
@@ -31,6 +31,7 @@ const Index = ({ allPosts }: Props) => {
               author={heroPost.author}
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
+              tags={heroPost.tags}
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
@@ -50,6 +51,7 @@ export const getStaticProps = async () => {
     'author',
     'coverImage',
     'excerpt',
+    'tags',
   ])
 
   return {

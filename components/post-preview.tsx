@@ -3,6 +3,8 @@ import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
 import Author from '../types/author'
+import React from 'react'
+import Tag from './tag'
 
 type Props = {
   title: string
@@ -11,6 +13,7 @@ type Props = {
   excerpt: string
   author: Author
   slug: string
+  tags?: string[]
 }
 
 const PostPreview = ({
@@ -20,6 +23,7 @@ const PostPreview = ({
   excerpt,
   author,
   slug,
+  tags,
 }: Props) => {
   return (
     <div>
@@ -32,6 +36,9 @@ const PostPreview = ({
         </Link>
       </h3>
       <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>
+      <div className="flex items-center mb-4 space-x-4">
+        {tags?.map(t => <Tag key={t} name={t} />)}
+      </div>
       <div className="flex items-center">
         <Avatar name={author.name} picture={author.picture} />
         <p className="mx-2">//</p>

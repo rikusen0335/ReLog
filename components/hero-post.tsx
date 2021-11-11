@@ -3,6 +3,8 @@ import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
 import Author from '../types/author'
+import React from 'react'
+import Tag from './tag'
 
 type Props = {
   title: string
@@ -11,6 +13,7 @@ type Props = {
   excerpt: string
   author: Author
   slug: string
+  tags?: string[]
 }
 
 const HeroPost = ({
@@ -20,6 +23,7 @@ const HeroPost = ({
   excerpt,
   author,
   slug,
+  tags,
 }: Props) => {
   return (
     <section>
@@ -33,8 +37,11 @@ const HeroPost = ({
               <a className="hover:underline">{title}</a>
             </Link>
           </h3>
-          <div className="mb-4 text-lg md:mb-0">
+          <div className="flex items-center mb-4 text-lg md:mb-0">
             <DateFormatter dateString={date} />
+            <div className="flex items-center ml-5 space-x-4">
+              {tags?.map(t => <Tag key={t} name={t} />)}
+            </div>
           </div>
         </div>
         <div>
