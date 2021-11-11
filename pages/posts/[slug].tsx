@@ -23,6 +23,7 @@ import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 import { remarkMdxImages } from "remark-mdx-images";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 
 
 type Props = {
@@ -33,9 +34,12 @@ type Props = {
 
 const Post = ({ post, morePosts, preview }: Props) => {
   const router = useRouter()
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
+
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
+
   return (
     <Layout preview={preview}>
       <Container>
@@ -49,7 +53,21 @@ const Post = ({ post, morePosts, preview }: Props) => {
                 <title>
                   {post.title} | {SITE_NAME}
                 </title>
-                <meta property="og:image" content={post.ogImage.url} />
+                <meta
+                  property="og:image"
+                  key="ogImage"
+                  content={post.ogImage.url}
+                />
+                <meta
+                  name="twitter:card"
+                  key="twitterCard"
+                  content="summary_large_image"
+                />
+                <meta
+                  name="twitter:image"
+                  key="twitterImage"
+                  content={post.ogImage.url}
+                />
               </Head>
               <PostHeader
                 title={post.title}
@@ -130,7 +148,12 @@ export async function getStaticProps({ params }: Params) {
         return options
       },
     }
-  )
+  );
+
+  const baseUrl = {
+    production: "https://devmia.net",
+    development: "http://localhost:3000",
+  }[process.env.NODE_ENV];
 
   return {
     props: {
@@ -138,6 +161,9 @@ export async function getStaticProps({ params }: Params) {
         ...post,
         content,
         rawContent,
+        ogImage: {
+          url: `${baseUrl}/api/ogp?title=${post.title}`
+        },
       },
     },
   }
