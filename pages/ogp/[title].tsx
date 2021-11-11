@@ -68,7 +68,6 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async (cont
             max-width: 1200px;
             max-height: 675px;
             background-color: #f9fafb;
-            border: 1px solid gray;
 
             --bg-color: hsl(256, 33, 10);
             --dot-color: hsl(256, 33, 70);
