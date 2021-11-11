@@ -1,9 +1,7 @@
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { GetServerSideProps } from 'next'
 import chromium from 'chrome-aws-lambda'
 import puppeteer from 'puppeteer-core'
-import { ServerResponse } from 'http'
 import { ParsedUrlQuery } from 'querystring'
-import { isPropertySignature } from 'typescript'
 
 const Image: React.FC = () => {
   return <></>
