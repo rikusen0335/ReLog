@@ -38,13 +38,13 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async (cont
   const options = {
     development: {
       args: [],
-      defaultViewport: { width: 1200, height: 675 },
+      defaultViewport: { width: 1200, height: 630 },
       executablePath: exePath,
       headless: true
     }, // TODO: いったんローカルでの開発は断念した...
     production: {
       args: chromium.args,
-      defaultViewport: { width: 1200, height: 675 },
+      defaultViewport: { width: 1200, height: 630 },
       executablePath: await chromium.executablePath,
       headless: chromium.headless,
     },
@@ -66,7 +66,7 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async (cont
             width: 1200px;
             height: 675px;
             max-width: 1200px;
-            max-height: 675px;
+            max-height: 630px;
             background-color: #f9fafb;
 
             --bg-color: hsl(256, 33, 10);
