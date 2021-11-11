@@ -162,7 +162,7 @@ export async function getStaticProps({ params }: Params) {
         content,
         rawContent,
         ogImage: {
-          url: `${baseUrl}/api/ogp/${post.title}`
+          url: `${baseUrl}/ogp/${post.title}`
         },
       },
     },
