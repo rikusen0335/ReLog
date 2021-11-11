@@ -1,16 +1,26 @@
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import chromium from 'chrome-aws-lambda'
 import puppeteer from 'puppeteer-core'
+import { ServerResponse } from 'http'
+import { ParsedUrlQuery } from 'querystring'
+import { isPropertySignature } from 'typescript'
 
 const Image: React.FC = () => {
   return <></>
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  res,
-  params,
-}) => {
-  const { title } = params
+type Props = {
+}
+
+type Params = ParsedUrlQuery & {
+  params: {
+    title: string
+  }
+}
+
+export const getServerSideProps: GetServerSideProps<Props, Params> = async (context) => {
+  const { title } = context.params!
+  const { res } = context;
 
   if (!title) {
     res.statusCode = 400

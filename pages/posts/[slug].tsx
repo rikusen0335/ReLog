@@ -153,6 +153,7 @@ export async function getStaticProps({ params }: Params) {
   const baseUrl = {
     production: "https://devmia.net",
     development: "http://localhost:3000",
+    test: "http://localhost:3000", // 使わないけど
   }[process.env.NODE_ENV];
 
   return {
