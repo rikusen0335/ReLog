@@ -1,8 +1,9 @@
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import chromium from 'chrome-aws-lambda'
 import puppeteer from 'puppeteer-core'
+import { ServerResponse } from 'http'
 import { ParsedUrlQuery } from 'querystring'
-import { COOL_SITE_NAME } from '../../../lib/constants'
+import { isPropertySignature } from 'typescript'
 
 const Image: React.FC = () => {
   return <></>
@@ -27,111 +28,37 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async (cont
     return { props: {} }
   }
 
-  const exePath = process.platform === 'win32'
-    ? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
-    : process.platform === 'linux'
-    ? '/usr/bin/google-chrome'
-    : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-
-    console.log(exePath)
-
-  const options = {
-    development: {
-      args: [],
-      defaultViewport: { width: 1200, height: 675 },
-      executablePath: exePath,
-      headless: true
-    }, // TODO: いったんローカルでの開発は断念した...
-    production: {
-      args: chromium.args,
-      defaultViewport: { width: 1200, height: 675 },
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless,
-    },
-    test: {},
-  }[process.env.NODE_ENV];
-
-  console.log(options)
-
-  const browser = await puppeteer.launch(options)
+  const browser = await puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: { width: 1200, height: 675 },
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless,
+  })
 
   const html = `<html>
       <head>
         <style>
-          body {
-            width: 1200px;
-            height: 675px;
-            max-width: 1200px;
-            max-height: 675px;
-            background-color: #f9fafb;
-            border: 1px solid gray;
-
-            --bg-color: hsl(256, 33, 10);
-            --dot-color: hsl(256, 33, 70);
-
-            --dot-size: 1px;
-            --dot-space: 22px;
-
-            /*background:
-                  linear-gradient(90deg, var(--bg-color) (var(--dot-space) - var(--dot-size)), transparent 1%) center,
-                  linear-gradient(var(--bg-color) (var(--dot-space) - var(--dot-size)), transparent 1%) center,
-                  var(--dot-color);
-                background-size: var(--dot-space) var(--dot-space);*/
-
-            background: linear-gradient(90deg, #fff 21px, transparent 4%) center, linear-gradient(#fff 21px, transparent 4%) center, #a799cc;
-            background-size: 22px 22px;
-          }
-
-          .container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-          }
-
-          .title {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            width: 80%;
-            height: 100%;
-            margin: auto;
-            color: #273141;
-            font-size: 60px;
-            font-weight: bold;
-            line-height: 1.5;
-            font-family: 'Noto Sans JP', sans-serif;
-          }
-
-          .site-name {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            color: #111;
-            font-family:
-              system-ui,
-              -apple-system,
-              'Segoe UI',
-              Roboto,
-              Helvetica,
-              Arial,
-              sans-serif,
-              'Apple Color Emoji',
-              'Segoe UI Emoji';
-            font-weight: bold;
-            font-size: 50px;
-            margin-top: auto;
-            margin-bottom: 20px;
-            margin-right: 40px;
-          }
+        body {
+          width: 1200px;
+          height: 675px;
+          background-color: #f9fafb;
+        }
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 60%;
+          height: 100%;
+          margin: auto;
+          color: #374151;
+          font-size: 3rem;
+          font-weight: bold;
+          line-height: 1.5;
+        }
         </style>
       </head>
-
       <body>
-        <div class="container">
-          <div class="title">新しいMinecraft Launcherへの引っ越し方法について</div>
-          <p class="site-name">// ReLog</p>
-        </div>
+        <div>${title}</div>
       </body>
     </html>`
 
