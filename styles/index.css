@@ -14,6 +14,8 @@
 
 /* Your own custom utilities */
 html {
+    background: linear-gradient(90deg, #fff 21px, transparent 4%) center, linear-gradient(#fff 21px, transparent 1%) center, #d7c9dc;
+    background-size: 22px 22px;
     font-family: Neue, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Hiragino Sans, Hiragino Kaku Gothic ProN, BIZ UDPGothic, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",  Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
 }
 
