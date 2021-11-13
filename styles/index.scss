@@ -18,6 +18,10 @@
 $dot-size: 1px;
 $dot-space: 22px;
 
+* {
+    transition: all .2s linear;
+}
+
 html {
     // Colors
     $bg-color: hsl(10, 10%, 100%);
@@ -27,7 +31,7 @@ html {
         linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
         linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
 	background-size: $dot-space $dot-space;
-    font-family: Neue, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Hiragino Sans, Hiragino Kaku Gothic ProN, BIZ UDPGothic, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",  Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+    font-family: Neue, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Hiragino Sans, Hiragino Kaku Gothic ProN, BIZ UDPGothic, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",  Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 html.dark {

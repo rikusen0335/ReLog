@@ -15,7 +15,7 @@ const components = {
         <h1
             {...props}
             className={cn(
-                "flex mt-8 mb-4 text-4xl leading-snug font-bold border-b pl-1 pb-2 border-gray-400 dark:text-light-50",
+                "flex mt-8 mb-4 text-4xl leading-snug font-bold border-b pl-1 pb-2 border-gray-400 dark:text-light-50 dark:border-portgore-200",
                 props.className
             )}
         >
@@ -60,7 +60,7 @@ const components = {
         />
     ),
     hr: (props: ComponentPropsWithoutRef<"hr">) => (
-        <hr {...props} className={cn("my-12 border-gray-300", props.className)} />
+        <hr {...props} className={cn("my-12 border-gray-300 dark:border-portgore-600", props.className)} />
     ),
     table: (props: ComponentPropsWithoutRef<"table">) => (
         <table
