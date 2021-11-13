@@ -81,7 +81,7 @@ const components = {
         />
     ),
     tr: (props: ComponentPropsWithoutRef<"tr">) => (
-        <tr {...props} className={cn("hover:bg-gray-50", props.className)} />
+        <tr {...props} className={cn("group", props.className)} />
     ),
     th: (props: ComponentPropsWithoutRef<"th">) => (
         <th
@@ -96,7 +96,7 @@ const components = {
         <td
             {...props}
             className={cn(
-                "border-t-0 border-b px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4",
+                "border-t-0 bg-[#fcfcfd] group-hover:bg-[#f7f7f9] border-b px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4",
                 props.className
             )}
         />
