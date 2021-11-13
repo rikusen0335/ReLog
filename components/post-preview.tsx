@@ -41,7 +41,7 @@ const PostPreview = ({
       </div>
       <div className="flex items-center">
         <Avatar name={author.name} picture={author.picture} />
-        <p className="mx-2">//</p>
+        <p className="mx-2 dark:text-light-600">//</p>
         <DateFormatter dateString={date} />
       </div>
     </div>

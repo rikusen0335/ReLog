@@ -78,7 +78,7 @@ const components = {
         <th
             {...props}
             className={cn(
-                "px-6 bg-gray-100 text-gray-700 align-middle border border-solid border-gray-200 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left",
+                "px-6 bg-gray-100 text-gray-700 dark:bg-portgore-700 dark:text-light-300 dark:border-portgore-500 align-middle border border-solid border-gray-200 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left",
                 props.className
             )}
         />
@@ -87,7 +87,7 @@ const components = {
         <td
             {...props}
             className={cn(
-                "border-t-0 bg-[#fcfcfd] group-hover:bg-[#f7f7f9] border-b px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4",
+                "border-t-0 bg-[#fcfcfd] group-hover:bg-[#f7f7f9] dark:bg-portgore-600 dark:text-light-100 dark:border-portgore-400 dark:group-hover:bg-portgore-500 border-b px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4",
                 props.className
             )}
         />
