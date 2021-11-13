@@ -2,6 +2,8 @@ import React, { ComponentPropsWithoutRef } from "react";
 import markdownStyles from "./markdown-styles.module.css";
 import cn from "classnames";
 import { getMDXComponent } from "mdx-bundler/client";
+import { useDarkMode } from "../hooks/useDarkMode";
+import { ThemeButton } from "./theme-button";
 
 type Props = {
     source: string;
@@ -13,7 +15,7 @@ const components = {
         <h1
             {...props}
             className={cn(
-                "flex mt-8 mb-4 text-4xl leading-snug font-bold border-b pl-1 pb-2 border-gray-400",
+                "flex mt-8 mb-4 text-4xl leading-snug font-bold border-b pl-1 pb-2 border-gray-400 dark:text-light-50",
                 props.className
             )}
         >
@@ -24,7 +26,7 @@ const components = {
         <h2
             {...props}
             className={cn(
-                "flex mt-4 mb-4 text-2xl leading-snug font-bold",
+                "flex mt-4 mb-4 text-2xl leading-snug font-bold dark:text-light-100",
                 props.className
             )}
         >
@@ -34,7 +36,7 @@ const components = {
     h3: (props: ComponentPropsWithoutRef<"h3">) => (
         <h3
             {...props}
-            className={cn("flex mt-2 mb-4 text-xl leading-snug", props.className)}
+            className={cn("flex mt-2 mb-4 text-xl leading-snug dark:text-light-100", props.className)}
         >
             {props.children}
         </h3>
@@ -42,30 +44,19 @@ const components = {
     p: (props: ComponentPropsWithoutRef<"p">) => (
         <p
             {...props}
-            className={cn("mb-4 text-base leading-relaxed", props.className)}
-        />
-    ),
-    // Reference: https://stackoverflow.com/questions/67945559/next-mdx-remote-doesnt-pass-the-component
-    inlineCode: (props: ComponentPropsWithoutRef<"h1">) => (
-        <code
-            {...props}
-            style={{ color: "#ff6ac1" }}
-            className={cn(
-                "py-[0.1rem] px-1 mx-1 bg-gray-200 rounded",
-                props.className
-            )}
+            className={cn("mb-4 text-base leading-relaxed dark:text-light-200", props.className)}
         />
     ),
     ul: (props: ComponentPropsWithoutRef<"ul">) => (
         <ul
             {...props}
-            className={cn("mb-4 list-disc list-inside", props.className)}
+            className={cn("mb-4 list-disc list-inside dark:text-light-50", props.className)}
         />
     ),
     ol: (props: ComponentPropsWithoutRef<"ol">) => (
         <ol
             {...props}
-            className={cn("mb-4 list-decimal list-inside", props.className)}
+            className={cn("mb-4 list-decimal list-inside dark:text-light-50", props.className)}
         />
     ),
     hr: (props: ComponentPropsWithoutRef<"hr">) => (
@@ -108,7 +99,7 @@ const components = {
         <blockquote
             {...props}
             className={cn(
-                "pl-3 p-2 mx-2 my-2 bg-gray-100 mb-4 border-l-4 border-gray-400 rounded-r-lg;",
+                "pl-3 p-2 mx-2 my-2 bg-gray-100 mb-4 border-l-4 border-gray-400 rounded-r-lg dark:bg-portgore-800 dark:border-portgore-500",
                 props.className
             )}
         />
@@ -120,7 +111,7 @@ const PostBody = ({ source }: Props) => {
 
     return (
         <div className="max-w-5xl mx-auto">
-            <div className="max-w-4xl px-16 py-8 mx-auto bg-[#fafafc] markdown">
+            <div className="max-w-4xl px-16 py-8 mx-auto bg-[#fafafc] dark:bg-[#121120] markdown">
                 <MDXRenderer components={components} />
             </div>
         </div>

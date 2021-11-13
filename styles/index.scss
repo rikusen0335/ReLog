@@ -1,0 +1,78 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+/* Write you own custom component styles here */
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
+
+// Dimensions
+$dot-size: 1px;
+$dot-space: 22px;
+
+html {
+    // Colors
+    $bg-color: hsl(10, 10%, 100%);
+    $dot-color: hsl(256, 33%, 85%);
+
+    background:
+        linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
+	background-size: $dot-space $dot-space;
+    font-family: Neue, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Hiragino Sans, Hiragino Kaku Gothic ProN, BIZ UDPGothic, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",  Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+}
+
+html.dark {
+    // Colors
+    $bg-color: hsl(250, 33%, 10%);
+    $dot-color: hsl(256, 33%, 30%);
+
+    background:
+        linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+        linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
+    background-size: $dot-space $dot-space;
+}
+
+.hint {
+    @apply px-4 py-4 border-l-[3px] rounded-r text-gray-800 dark:text-light-200
+}
+.hint.tip {
+    @apply border-blue-300 bg-blue-100 dark:bg-blue-900 dark:border-blue-600
+}
+
+.hint.warn {
+    @apply border-yellow-200 bg-yellow-100 dark:bg-yellow-900 dark:border-yellow-600
+}
+
+.hint.error {
+    @apply border-red-200 bg-red-100 dark:bg-red-900 dark:border-red-600
+}
+
+.rehype-code-title {
+    font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+    @apply pt-2 px-4 bg-[#011627] text-white
+}
+
+/*
+ * 若干ハックっぽい
+ * inlineCodeでハイライトできないので、preタグに入ってないcodeに対してのみスタイルを適用する
+ */
+:not(pre) > code {
+    @apply text-blue-500 border border-gray-300 rounded bg-gray-50 py-[2px] px-1 mx-1 dark:border-gray-700 dark:bg-gray-900 dark:text-blue-300
+}
+
+li::marker {
+    @apply text-gray-500 dark:text-light-400
+}
+
+.markdown blockquote > p {
+    @apply mb-0
+}

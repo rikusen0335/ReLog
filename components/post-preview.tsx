@@ -30,12 +30,12 @@ const PostPreview = ({
       <div className="mb-5">
         <CoverImage slug={slug} title={title} src={coverImage} />
       </div>
-      <h3 className="mb-3 text-3xl leading-snug">
+      <h3 className="mb-3 text-3xl leading-snug dark:text-light-50">
         <Link as={`/posts/${slug}`} href="/posts/[slug]">
           <a className="hover:underline">{title}</a>
         </Link>
       </h3>
-      <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>
+      <p className="mb-4 text-lg leading-relaxed dark:text-light-300">{excerpt}</p>
       <div className="flex items-center mb-4 space-x-4">
         {tags?.map(t => <Tag key={t} name={t} />)}
       </div>

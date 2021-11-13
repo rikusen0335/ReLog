@@ -20,7 +20,7 @@ const PostHeader = ({ title, coverImage, date, author, tags }: Props) => {
       <div className="flex items-center mb-4 space-x-4">
         {tags?.map(t => <Tag key={t} name={t} />)}
       </div>
-      <div className="hidden pl-5 border-l-2 border-black md:block md:mb-12">
+      <div className="hidden pl-5 border-l-2 border-black dark:border-light-200 md:block md:mb-12">
         <div className="mb-4">
           <Avatar name={author.name} picture={author.picture} />
         </div>
