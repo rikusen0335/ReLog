@@ -18,9 +18,9 @@
 $dot-size: 1px;
 $dot-space: 22px;
 
-* {
-    transition: all .2s linear;
-}
+// * {
+//     transition: all .2s;
+// }
 
 html {
     // Colors
@@ -32,6 +32,7 @@ html {
         linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
 	background-size: $dot-space $dot-space;
     font-family: Neue, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Hiragino Sans, Hiragino Kaku Gothic ProN, BIZ UDPGothic, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",  Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    transition: all .2s;
 }
 
 html.dark {
@@ -43,9 +44,11 @@ html.dark {
         linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
         linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
     background-size: $dot-space $dot-space;
+    transition: all .2s;
 }
 
 .hint {
+    transition: all .2s;
     @apply px-4 py-4 border-l-[3px] rounded-r text-gray-800 dark:text-light-200
 }
 .hint.tip {
@@ -79,4 +82,10 @@ li::marker {
 
 .markdown blockquote > p {
     @apply mb-0
+}
+
+
+// Theme Toggle Animations
+p {
+    transition: all .2s;
 }
