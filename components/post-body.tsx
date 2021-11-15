@@ -66,7 +66,7 @@ const components = {
         <table
             {...props}
             className={cn(
-                "items-center bg-transparent w-full border-collapse my-4 54  ",
+                "items-center bg-transparent border-collapse my-4 table-auto",
                 props.className
             )}
         />
@@ -111,7 +111,7 @@ const PostBody = ({ source }: Props) => {
 
     return (
         <div className="max-w-5xl mx-auto">
-            <div className="max-w-4xl px-16 py-8 mx-auto bg-[#fafafc] dark:bg-[#121120] markdown">
+            <div className="max-w-4xl px-2 md:px-16 py-8 mx-auto bg-[#fafafc] dark:bg-[#121120] markdown">
                 <MDXRenderer components={components} />
             </div>
         </div>

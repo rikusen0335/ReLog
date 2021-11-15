@@ -35,14 +35,19 @@ const PostPreview = ({
           <a className="hover:underline">{title}</a>
         </Link>
       </h3>
-      <p className="mb-4 text-lg leading-relaxed dark:text-light-300">{excerpt}</p>
-      <div className="flex items-center mb-4 space-x-4">
-        {tags?.map(t => <Tag key={t} name={t} />)}
+      <p className="mb-4 text-base leading-relaxed dark:text-light-300">{excerpt}</p>
+      <div className="flex items-center mb-4">
+        <div className="block mr-4 md:hidden">
+          <DateFormatter dateString={date} />
+        </div>
+        {tags?.map(t => <Tag className="mr-4" key={t} name={t} />)}
       </div>
       <div className="flex items-center">
         <Avatar name={author.name} picture={author.picture} />
-        <p className="mx-2 dark:text-light-600">//</p>
-        <DateFormatter dateString={date} />
+        <p className="hidden mx-2 md:block dark:text-light-600">//</p>
+        <div className="hidden md:block">
+          <DateFormatter dateString={date} />
+        </div>
       </div>
     </div>
   )

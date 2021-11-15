@@ -4,6 +4,7 @@ import { CMS_NAME, HOME_OG_IMAGE_URL } from '../lib/constants'
 const Meta = () => {
   return (
     <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link
         rel="apple-touch-icon"
         sizes="180x180"

@@ -6,7 +6,7 @@ const Intro = () => {
       <h1 className="text-6xl font-bold leading-tight tracking-tighter md:text-8xl md:pr-8 dark:text-light-100">
         {COOL_SITE_NAME}.
       </h1>
-      <h4 className="mt-5 text-lg text-center md:text-left md:pl-8 dark:text-light-300">
+      <h4 className="mt-5 text-lg text-center md:text-;g md:text-left md:pl-8 dark:text-light-300">
         An extremely garbage blog for notes.
       </h4>
     </section>
