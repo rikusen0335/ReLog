@@ -79,7 +79,7 @@ html.dark {
  * inlineCodeでハイライトできないので、preタグに入ってないcodeに対してのみスタイルを適用する
  */
 :not(pre) > code {
-    @apply text-blue-500 border border-gray-300 rounded bg-gray-50 py-[2px] px-1 mx-1 dark:border-gray-700 dark:bg-gray-900 dark:text-blue-300
+    @apply text-blue-500 border border-gray-300 rounded bg-gray-50 py-[2px] px-1 mx-1 dark:border-gray-700 dark:bg-gray-900 dark:text-blue-300 break-all
 }
 
 li::marker {

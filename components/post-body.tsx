@@ -63,13 +63,15 @@ const components = {
         <hr {...props} className={cn("my-12 border-gray-300 dark:border-portgore-600", props.className)} />
     ),
     table: (props: ComponentPropsWithoutRef<"table">) => (
-        <table
-            {...props}
-            className={cn(
-                "items-center bg-transparent border-collapse my-4 table-auto",
-                props.className
-            )}
-        />
+        <div className="overflow-auto">
+            <table
+                {...props}
+                className={cn(
+                    "items-center bg-transparent border-collapse my-4 table-auto",
+                    props.className
+                )}
+            />
+        </div>
     ),
     tr: (props: ComponentPropsWithoutRef<"tr">) => (
         <tr {...props} className={cn("group", props.className)} />
@@ -111,7 +113,7 @@ const PostBody = ({ source }: Props) => {
 
     return (
         <div className="max-w-5xl mx-auto">
-            <div className="max-w-4xl px-2 md:px-16 py-8 mx-auto bg-[#fafafc] dark:bg-[#121120] markdown">
+            <div className="max-w-4xl px-4 -mx-2 md:mx-auto md:px-16 py-8 bg-[#fafafc] dark:bg-[#121120] markdown">
                 <MDXRenderer components={components} />
             </div>
         </div>
