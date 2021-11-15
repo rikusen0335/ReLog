@@ -47,6 +47,10 @@ html.dark {
     transition: all .2s;
 }
 
+body {
+    width: 100vh;
+}
+
 .hint {
     transition: all .2s;
     @apply px-4 py-4 border-l-[3px] rounded-r text-gray-800 dark:text-light-200
