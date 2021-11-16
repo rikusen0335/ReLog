@@ -4,6 +4,7 @@ import CoverImage from './cover-image'
 import PostTitle from './post-title'
 import Author from '../types/author'
 import Tag from './tag'
+import Image from "next/image";
 
 type Props = {
   title: string
@@ -27,7 +28,14 @@ const PostHeader = ({ title, coverImage, date, author, tags }: Props) => {
         <DateFormatter dateString={date} />
       </div>
       <div className="mb-8 md:mb-16 sm:mx-0">
-        <CoverImage title={title} src={coverImage} />
+      <div className="imageContainer">
+        <Image
+          src={coverImage}
+          alt={`Cover Image for ${title}`}
+          className="image"
+          layout="fill"
+        />
+      </div>
       </div>
       <div className="max-w-2xl mx-auto">
         <div className="block mb-6 md:hidden">

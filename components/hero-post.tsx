@@ -27,7 +27,7 @@ const HeroPost = ({
 }: Props) => {
   return (
     <section>
-      <div className="mb-4 md:mb-16">
+      <div className="mb-4 md:mb-10">
         <CoverImage title={title} src={coverImage} slug={slug} className="max-h-[400px] w-full object-cover" />
       </div>
       <div className="mb-24 md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 md:mb-28">

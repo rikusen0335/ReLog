@@ -95,3 +95,20 @@ li::marker {
 p {
     transition: all .2s;
 }
+
+.imageContainer {
+    display: inline-block;
+    height: 30px;
+
+    & > span {
+        position: unset !important;
+        height: 100%;
+    }
+
+    .image {
+        object-fit: contain;
+        width: auto !important;
+        position: relative !important;
+        height: 100% !important;
+    }
+}
