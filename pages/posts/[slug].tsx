@@ -23,6 +23,7 @@ import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 import { remarkMdxImages } from "remark-mdx-images";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { NextPage } from 'next'
 
 
 type Props = {
@@ -31,7 +32,7 @@ type Props = {
   preview?: boolean
 }
 
-const Post = ({ post, morePosts, preview }: Props) => {
+const Post: NextPage<Props> = ({ post, morePosts, preview }) => {
   const router = useRouter()
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
 
