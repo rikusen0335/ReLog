@@ -44,7 +44,7 @@ const components = {
     p: (props: ComponentPropsWithoutRef<"p">) => (
         <p
             {...props}
-            className={cn("mb-4 text-base leading-relaxed dark:text-light-200", props.className)}
+            className={cn("mb-4 text-base leading-8 md:leading-7 dark:text-light-200", props.className)}
         />
     ),
     ul: (props: ComponentPropsWithoutRef<"ul">) => (
