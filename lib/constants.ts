@@ -5,3 +5,5 @@ export const HOME_OG_IMAGE_URL =
 export const SITE_NAME = 'ReLog'
 export const COOL_SITE_NAME = `// ${SITE_NAME}`
 export const BLOG_REPOSITORY_URL = "https://github.com/rikusen0335/ReLog"
+export const DEVELOP_SITE_URL = "http://localhost:3000"
+export const PRODUCTION_SITE_URL = "https://rikusen.dev"

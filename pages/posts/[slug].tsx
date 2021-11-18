@@ -8,7 +8,7 @@ import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
-import { CMS_NAME, SITE_NAME } from '../../lib/constants'
+import { CMS_NAME, SITE_NAME, DEVELOP_SITE_URL, PRODUCTION_SITE_URL } from '../../lib/constants'
 import PostType from '../../types/post'
 import { bundleMDX } from 'mdx-bundler'
 import { resolve } from 'path'
@@ -163,9 +163,9 @@ export async function getStaticProps({ params }: Params) {
   );
 
   const baseUrl = {
-    production: "https://devmia.net",
-    development: "http://localhost:3000",
-    test: "http://localhost:3000", // 使わないけど
+    production: PRODUCTION_SITE_URL,
+    development: DEVELOP_SITE_URL,
+    test: DEVELOP_SITE_URL, // 使わないけど
   }[process.env.NODE_ENV];
 
   return {
