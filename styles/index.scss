@@ -79,7 +79,7 @@ html.dark {
  * inlineCodeでハイライトできないので、preタグに入ってないcodeに対してのみスタイルを適用する
  */
 :not(pre) > code {
-    @apply text-pink-400 mx-1 dark:border-gray-700 dark:text-pink-400 break-all
+    @apply text-pink-500 mx-1 dark:border-gray-700 dark:text-pink-400 break-all
 }
 :not(pre) > code:before {
     content: "`";
@@ -89,7 +89,7 @@ html.dark {
 }
 
 li::marker {
-    @apply text-gray-500 dark:text-light-400
+    @apply text-gray-500 dark:text-light-800
 }
 
 .markdown blockquote > p {
