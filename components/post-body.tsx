@@ -1,9 +1,7 @@
 import React, { ComponentPropsWithoutRef } from "react";
-import markdownStyles from "./markdown-styles.module.css";
 import cn from "classnames";
 import { getMDXComponent } from "mdx-bundler/client";
-import { useDarkMode } from "../hooks/useDarkMode";
-import { ThemeButton } from "./theme-button";
+import CodeBlock from "./markdown/code-block";
 
 type Props = {
     source: string;
@@ -94,9 +92,7 @@ const components = {
             )}
         />
     ),
-    pre: (props: ComponentPropsWithoutRef<"pre">) => (
-        <pre {...props} className={cn("!mt-0 !mb-4", props.className)} />
-    ),
+    pre: (props: ComponentPropsWithoutRef<"pre">) => <CodeBlock {...props} />,
     blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
         <blockquote
             {...props}
