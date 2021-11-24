@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, ReactNode, useRef, useState } from "react";
 import cx from "classnames";
 
-type Props = ComponentPropsWithoutRef<"pre"> &{
+type Props = ComponentPropsWithoutRef<"pre"> & {
 };
 
 const CodeBlock = (props: Props) => {

@@ -69,6 +69,12 @@ html.dark {
     @apply border-red-200 bg-red-100 dark:bg-red-900 dark:border-red-600
 }
 
+.tips {
+    p {
+        margin: 0;
+    }
+}
+
 .rehype-code-title {
     font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
     @apply inline-block pt-2 px-4 bg-[#011627] text-white

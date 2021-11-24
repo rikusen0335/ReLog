@@ -23,7 +23,10 @@ import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 import { remarkMdxImages } from "remark-mdx-images";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import remarkDirectiveRehype from 'remark-directive-rehype'
 import { NextPage } from 'next'
+import { visit } from 'unist-util-visit'
+import { h } from 'hastscript'
 
 
 type Props = {
@@ -99,6 +102,24 @@ const Post: NextPage<Props> = ({ post, morePosts, preview }) => {
 
 export default Post
 
+function myRemarkPlugin() {
+  return (tree) => {
+    visit(tree, (node) => {
+      if (
+        node.type === 'textDirective' ||
+        node.type === 'leafDirective' ||
+        node.type === 'containerDirective'
+      ) {
+        const data = node.data || (node.data = {})
+        const hast = h(node.name, node.attributes)
+
+        data.hName = hast.tagName
+        data.hProperties = hast.properties
+      }
+    })
+  }
+}
+
 type Params = {
   params: {
     slug: string
@@ -130,6 +151,8 @@ export async function getStaticProps({ params }: Params) {
           remarkGfm,
           remarkMdxImages,
           remarkDirective,
+          // myRemarkPlugin,
+          remarkDirectiveRehype,
           // remarkMdxCodeMeta,
         ]
         options.rehypePlugins = [
