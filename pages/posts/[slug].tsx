@@ -8,7 +8,7 @@ import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
-import { CMS_NAME, SITE_NAME, DEVELOP_SITE_URL, PRODUCTION_SITE_URL } from '../../lib/constants'
+import { SITE_NAME, DEVELOP_SITE_URL, PRODUCTION_SITE_URL } from '../../lib/constants'
 import PostType from '../../types/post'
 import { bundleMDX } from 'mdx-bundler'
 import { resolve } from 'path'
@@ -102,23 +102,6 @@ const Post: NextPage<Props> = ({ post, morePosts, preview }) => {
 
 export default Post
 
-function myRemarkPlugin() {
-  return (tree) => {
-    visit(tree, (node) => {
-      if (
-        node.type === 'textDirective' ||
-        node.type === 'leafDirective' ||
-        node.type === 'containerDirective'
-      ) {
-        const data = node.data || (node.data = {})
-        const hast = h(node.name, node.attributes)
-
-        data.hName = hast.tagName
-        data.hProperties = hast.properties
-      }
-    })
-  }
-}
 
 type Params = {
   params: {
@@ -151,7 +134,6 @@ export async function getStaticProps({ params }: Params) {
           remarkGfm,
           remarkMdxImages,
           remarkDirective,
-          // myRemarkPlugin,
           remarkDirectiveRehype,
           // remarkMdxCodeMeta,
         ]
