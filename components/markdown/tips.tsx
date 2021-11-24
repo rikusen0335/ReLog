@@ -6,11 +6,12 @@ import React, {
 } from "react";
 import cx from "classnames";
 
-type Props = {
+export type TipsProps = {
+    type?: "info" | "warn" | "error";
     children: ReactNode;
 };
 
-const Tips = ({ children }: Props) => {
+const Tips = ({ children, type }: TipsProps) => {
     return (
         <div className="tips flex items-center border-blue-400 bg-blue-200 dark:bg-blue-900 dark:border-blue-600 px-4 py-4 border-l-[3px] rounded-r text-gray-800 dark:text-light-200">
             <svg

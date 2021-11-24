@@ -2,7 +2,7 @@ import React, { ComponentPropsWithoutRef } from "react";
 import cn from "classnames";
 import { getMDXComponent } from "mdx-bundler/client";
 import CodeBlock from "./markdown/code-block";
-import Tips from "./markdown/tips";
+import Tips, { TipsProps } from "./markdown/tips";
 
 type Props = {
     source: string;
@@ -103,7 +103,7 @@ const components = {
             )}
         />
     ),
-    tips: (props) => (<Tips {...props} />),
+    tips: (props: TipsProps) => (<Tips {...props} />),
 };
 
 const PostBody = ({ source }: Props) => {
