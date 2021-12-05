@@ -1,0 +1,55 @@
+---
+title: 'Barotraumaで途中でワークショップの潜水艦を入れたくなったとき'
+excerpt: 'Barotraumaのクリア目前、まさかの船が震度に耐えられない。替えようにもお金がない。お金があっても、放射能がやばい。完全に詰んだ場合にどうすればいいかを書きます。'
+coverImage: '/assets/blog/barotrauma-change-sub/cover.png'
+date: '2021-12-04T05:35:07.322Z'
+author:
+  name: rikusen0335
+  picture: '/assets/blog/authors/rikusen.png'
+ogImage:
+  url: '/assets/blog/barotrauma-change-sub/cover.png'
+tags:
+  - Barotrauma
+---
+
+Barotraumaのクリア目前、まさかの船が震度に耐えられない。替えようにもお金がない。お金があっても、放射能がやばい。
+完全に詰んだ場合にどうすればいいかを書きます。
+
+:::tips
+この記事は、v0.15.13.0時点が対象です。
+:::
+
+:br
+
+# 用意するもの
+- Chrome系のブラウザ
+- [セーブファイルのエディタ](https://ignis05.github.io/baro-save-editor/Decompressor)
+- Barotrauma
+
+# セーブファイルのバックアップ
+消えたらやばいものを編集するときは、まずバックアップを取りましょう。
+
+`C:\Users\<ユーザー名>\AppData\Local\Daedalic Entertainment GmbH`をエクスプローラーのアドレスバーに貼り付けて、`Barotrauma`フォルダーを右クリック > コピーを押して、デスクトップなどに貼り付けてください。
+
+# データの編集
+`Barotrauma`フォルダー内の`Multiplayer`を開き、`何らかの名前.save`があることを確認したら、[セーブファイルのエディタ](https://ignis05.github.io/baro-save-editor/Decompressor)をChrome系のブラウザで開いてください。
+
+ページを開き、赤四角で囲まれたボタンをクリックします。
+
+![](image_1.png 'ブラウズボタン')
+
+`Barotrauma`フォルダーを選択し、「サイトにファイルの読み取りを許可しますか？」のダイアログで`許可する`を押します。
+そうすると、こんな感じになっているはずです。
+
+![](image_2.png 'セーブファイルの表示')
+
+ここで、編集したいセーブの名前の横にあるボタンのうち、画像で示されているように左の`decompress`ボタンを押してください。
+例えば、`test`というセーブファイルをdecompressすると、`test`フォルダーが同じディレクトリに作られます。
+
+作成されたフォルダーに使いたい潜水艦の`.sub`ファイルをいれてください。いれたら、その潜水艦のファイル名を`.sub`抜きでコピーし、`gamesession.xml`を右クリックし、「編集」を押してください。
+
+開いたメモ帳の上にある、`ownedsubmarines`タグの中にある`sub`タグをコピーして下に貼り付けてください。
+貼り付けたら、`Gamesession`タグの中にある`submarine`と、`ownedsubmarines`タグの中にある`sub`タグの`name`に、先程コピーした潜水艦の名前を貼り付けます。
+
+セーブして閉じ、ブラウザで開いた[セーブファイルのエディタ](https://ignis05.github.io/baro-save-editor/Decompressor)に戻って、編集しているセーブファイルの名前の横にある、右の`compress`ボタンを押してください。
+新しく更新された`.save`ファイルを`C:\Users\<ユーザー名>\AppData\Local\Daedalic Entertainment GmbH\Barotrauma`にある同じ名前のファイルを上書きし、ゲームを起動して確認してみましょう。
