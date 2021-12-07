@@ -7,9 +7,10 @@ type Props = {
   src: string
   slug?: string
   className?: string
+  isTopHero?: boolean
 }
 
-const CoverImage = ({ title, src, slug, className = '' }: Props) => {
+const CoverImage = ({ title, src, slug, isTopHero, className = '' }: Props) => {
   const image = (
     <div className={cx('shadow-small imageContainer',
       className, {
@@ -20,7 +21,7 @@ const CoverImage = ({ title, src, slug, className = '' }: Props) => {
         src={src}
         alt={`Cover Image for ${title}`}
         layout='fill'
-        className="image"
+        className={isTopHero ? "heroImage" : "image"}
       />
     </div>
   )

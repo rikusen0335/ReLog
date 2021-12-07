@@ -28,7 +28,7 @@ const HeroPost = ({
   return (
     <section>
       <div className="mb-4 md:mb-10">
-        <CoverImage title={title} src={coverImage} slug={slug} className="max-h-[400px] w-full object-cover" />
+        <CoverImage title={title} src={coverImage} slug={slug} className="w-full" isTopHero />
       </div>
       <div className="mb-24 md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 md:mb-28">
         <div>
