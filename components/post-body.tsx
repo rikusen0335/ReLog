@@ -3,6 +3,7 @@ import cn from "classnames";
 import { getMDXComponent } from "mdx-bundler/client";
 import CodeBlock from "./markdown/code-block";
 import Tips, { TipsProps } from "./markdown/tips";
+import { Image } from "./markdown/image"
 
 type Props = {
     source: string;
@@ -46,6 +47,7 @@ const components = {
             className={cn("mb-4 text-base leading-8 md:leading-7 dark:text-light-200", props.className)}
         />
     ),
+    img: (props: ComponentPropsWithoutRef<"img">) => (<Image {...props} />),
     ul: (props: ComponentPropsWithoutRef<"ul">) => (
         <ul
             {...props}
