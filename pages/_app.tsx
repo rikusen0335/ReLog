@@ -7,6 +7,8 @@ import '../styles/index.scss'
 import "../styles/night-owl-no-italic.css"
 import "../styles/prism-highlight-and-lines.css";
 
+// Custom css under here
+
 import 'react-medium-image-zoom/dist/styles.css'
 
 import { ThemeButton } from '../components/theme-button';
