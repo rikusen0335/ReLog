@@ -63,16 +63,16 @@ const Work: NextPage<Props> = ({ work }) => {
                                     content={work.ogImage.url}
                                 /> */}
                             </Head>
-                            <h2 className="flex-col text-5xl font-bold transition lg:flex-row dark:text-light-50">
-                                {title}
-                                <span className="ml-4 text-[3.5rem]">{subtitle}</span>
+                            <h2 className="flex flex-col text-2xl font-bold transition md:text-4xl lg:text-5xl lg:flex-row dark:text-light-50">
+                                <span>{title}</span>
+                                <span className="ml-4 text-4xl md:text-5xl lg:text-[3.5rem]">{subtitle}</span>
                             </h2>
-                            <p className="mt-4 text-xl whitespace-pre-wrap transition dark:text-light-200">{description}</p>
-                            <div className="flex mt-4 mb-12 space-x-4">
+                            <p className="mt-4 text-xl leading-8 whitespace-pre-wrap transition dark:text-light-200 md:leading-7">{description}</p>
+                            <div className="flex flex-wrap mt-4 mb-12 space-x-4">
                                 {used.map((name, idx) => (
                                     <p
                                         key={idx}
-                                        className="px-[8px] py-[4px] text-gray-700 border border-gray-400 dark:text-light-300 dark:border-gray-500"
+                                        className="px-[8px] py-[4px] mb-2 text-gray-700 border border-gray-400 dark:text-light-300 dark:border-gray-500"
                                     >
                                         {name}
                                     </p>
@@ -83,7 +83,7 @@ const Work: NextPage<Props> = ({ work }) => {
                             <h4 className="mt-16 mb-8 text-4xl tracking-wider text-center transition dark:text-light-200">Gallery</h4>
                             <SimpleReactLightbox>
                                 <SRLWrapper>
-                                    <div className="grid grid-cols-3 gap-8 mx-32">
+                                    <div className="grid grid-cols-3 gap-0 mx-2 lg:gap-8 md:mx-16 lg:mx-32">
                                         {images.map((img, idx) => (
                                             <div className="transition hover:-translate-y-1" key={idx}>
                                             <Image
