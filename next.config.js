@@ -9,4 +9,7 @@ module.exports = {
   // experimental: {
   //   concurrentFeatures: true
   // },
+  images: {
+    domains: ['picsum.photos', "pbs.twimg.com"],
+  },
 }
