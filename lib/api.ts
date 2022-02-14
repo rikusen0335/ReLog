@@ -38,13 +38,20 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   return items
 }
 
-export function getAllPosts(fields: string[] = []) {
+/**
+ * 非公開のものは含まない
+ * Private posts are excluded
+ */
+export function getAllPosts(fields: string[] = ['public']) {
   const slugs = getPostSlugs()
   const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
+    .map((slug) => getPostBySlug(slug, [...fields, "public"]))
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
-  return posts
+
+  // @ts-ignore postはRecordであるため仕方ない
+  const publicPosts = posts.filter((post => post["public"] != false))
+  return publicPosts
 }
 
 const allWorks: Work[] = [

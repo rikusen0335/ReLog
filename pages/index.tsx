@@ -53,6 +53,7 @@ export const getStaticProps = async () => {
     'coverImage',
     'excerpt',
     'tags',
+    'public',
   ])
 
   return {

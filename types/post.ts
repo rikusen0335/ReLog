@@ -14,6 +14,7 @@ type PostType = {
   tags?: string[]
   content: BundleMDXReturn // TODO: とりあえず
   rawContent: string;
+  public: boolean
 }
 
 export default PostType
