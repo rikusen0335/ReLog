@@ -63,11 +63,11 @@ const Work: NextPage<Props> = ({ work }) => {
                                     content={work.ogImage.url}
                                 /> */}
                             </Head>
-                            <h2 className="flex flex-col text-2xl font-bold transition md:text-4xl lg:text-5xl lg:flex-row dark:text-light-50">
-                                <span>{title}</span>
-                                <span className="lg:ml-4 text-4xl md:text-5xl lg:text-[3.5rem]">{subtitle}</span>
+                            <h2 className="flex flex-col transition lg:flex-row dark:text-light-50 lg:items-baseline">
+                                <span className="text-2xl font-bold md:text-3xl lg:text-5xl">{title}</span>
+                                <span className="font-bold lg:ml-2 xl:ml-4 text-4xl md:text-5xl lg:text-[3.5rem] lg:leading-[3.5rem]">{subtitle}</span>
                             </h2>
-                            <p className="mt-4 text-xl leading-8 whitespace-pre-wrap transition dark:text-light-200 md:leading-7">{description}</p>
+                            <p className="mt-4 text-base leading-8 whitespace-pre-wrap transition sm:text-lg md:text-xl xl:text-2xl dark:text-light-200 md:leading-7">{description}</p>
                             <div className="flex flex-wrap mt-4 mb-12 space-x-4">
                                 {used.map((name, idx) => (
                                     <p
@@ -83,20 +83,20 @@ const Work: NextPage<Props> = ({ work }) => {
                             <h4 className="mt-16 mb-8 text-4xl tracking-wider text-center transition dark:text-light-200">Gallery</h4>
                             <SimpleReactLightbox>
                                 <SRLWrapper>
-                                    <div className="grid grid-cols-2 gap-0 mx-2 sm:grid-cols-3 lg:gap-8 md:mx-16 lg:mx-32">
+                                    <div className="grid grid-cols-1 gap-0 mx-2 xs:mx-4 sm:mx-8 xs:grid-cols-2 md:grid-cols-3 lg:gap-8 md:mx-16 lg:mx-32">
                                         {images.map((img, idx) => (
-                                            <div className="transition hover:-translate-y-1" key={idx}>
-                                            <Image
-                                                key={idx}
-                                                className="object-cover col-span-1 cursor-pointer"
-                                                width="100%"
-                                                height="100%"
-                                                layout="responsive"
-                                                src={img.source}
-                                                alt={img.alt}
-                                                // @ts-ignore 仕方ない
-                                                // srl_gallery_image="true"
-                                            />
+                                            <div className="col-span-1 transition hover:-translate-y-1" key={idx}>
+                                                <Image
+                                                    key={idx}
+                                                    className="object-cover cursor-pointer"
+                                                    width="100%"
+                                                    height="100%"
+                                                    layout="responsive"
+                                                    src={img.source}
+                                                    alt={img.alt}
+                                                    // @ts-ignore 仕方ない
+                                                    srl_gallery_image="true"
+                                                />
                                             </div>
                                         ))}
                                     </div>

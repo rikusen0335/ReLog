@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: [
     './public/**/*.html',
@@ -7,6 +9,12 @@ module.exports = {
   mode: 'jit',
   darkMode: 'class',
   theme: {
+    screens: {
+      'xs': '400px',
+      // => @media (min-width: 400px) { ... }
+
+      ...defaultTheme.screens, // This has to be here to apply smaller breakpoints
+    },
     extend: {
       colors: {
         'accent-1': '#FAFAFA',
@@ -62,4 +70,31 @@ module.exports = {
       },
     },
   },
+  corePlugins: {
+    container: false
+  },
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.container': {
+          maxWidth: '100%',
+          '@screen sm': {
+            maxWidth: '100%',
+          },
+          '@screen md': {
+            maxWidth: '768px',
+          },
+          '@screen lg': {
+            maxWidth: '1024px',
+          },
+          '@screen xl': {
+            maxWidth: '1280px',
+          },
+          '@screen 2xl': {
+            maxWidth: '1536px',
+          },
+        }
+      })
+    }
+  ]
 }
