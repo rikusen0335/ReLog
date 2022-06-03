@@ -17,6 +17,7 @@ import WorkType from "../../types/work";
 import { NextPage } from "next";
 import Image from "next/image";
 import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox";
+import { FaGithub } from "react-icons/fa"
 
 type Props = {
     work: WorkType;
@@ -25,7 +26,7 @@ type Props = {
 const Work: NextPage<Props> = ({ work }) => {
     const router = useRouter();
 
-    const { title, subtitle, description, thumbnail, images, used } = work;
+    const { title, subtitle, description, thumbnail, images, used, githubLink } = work;
 
     if (!router.isFallback && !work?.slug) {
         return <ErrorPage statusCode={404} />;
@@ -68,7 +69,7 @@ const Work: NextPage<Props> = ({ work }) => {
                                 <span className="font-bold lg:ml-2 xl:ml-4 text-4xl md:text-5xl lg:text-[3.5rem] lg:leading-[3.5rem]">{subtitle}</span>
                             </h2>
                             <p className="mt-4 text-base leading-8 whitespace-pre-wrap transition sm:text-lg md:text-xl xl:text-2xl dark:text-light-200 md:leading-7">{description}</p>
-                            <div className="flex flex-wrap mt-4 mb-12 space-x-4">
+                            <div className="flex flex-wrap mt-4 mb-6 space-x-4">
                                 {used.map((name, idx) => (
                                     <p
                                         key={idx}
@@ -78,6 +79,14 @@ const Work: NextPage<Props> = ({ work }) => {
                                     </p>
                                 ))}
                             </div>
+
+                            <div className="mb-12">
+                                {githubLink &&<div className="flex items-center space-x-2">
+                                    <span className="text-2xl dark:text-light-100"><FaGithub /></span>
+                                    <span className="text-xl"><a className="hover:underline decoration-neutral-700 dark:decoration-neutral-200 decoration-1 dark:text-light-300" href={githubLink}>{githubLink}</a></span>
+                                </div>}
+                            </div>
+
                             <img src={thumbnail} className="w-full h-[400px] object-cover" />
 
                             <h4 className="mt-16 mb-8 text-4xl tracking-wider text-center transition dark:text-light-200">Gallery</h4>

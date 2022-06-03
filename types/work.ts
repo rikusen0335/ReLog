@@ -12,6 +12,7 @@ type WorkType = {
     images: WorkImage[]
     thumbnail?: string
     used: string[]
+    githubLink?: string
 }
 
 export default WorkType
