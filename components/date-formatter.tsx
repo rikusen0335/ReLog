@@ -1,12 +1,16 @@
-import { parseISO, format } from 'date-fns'
+import { parseISO, format } from "date-fns";
 
 type Props = {
-  dateString: string
-}
+	dateString: string;
+};
 
 const DateFormatter = ({ dateString }: Props) => {
-  const date = parseISO(dateString)
-  return <time className="text-base dark:text-light-200" dateTime={dateString}>{format(date, 'yyyy.MM.dd')}に公開</time>
-}
+	const date = parseISO(dateString);
+	return (
+		<time className="text-base dark:text-light-200" dateTime={dateString}>
+			{format(date, "yyyy.MM.dd")}に公開
+		</time>
+	);
+};
 
-export default DateFormatter
+export default DateFormatter;

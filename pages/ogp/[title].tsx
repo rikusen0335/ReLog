@@ -1,61 +1,63 @@
-import { GetServerSideProps } from 'next'
-import chromium from 'chrome-aws-lambda'
-import puppeteer from 'puppeteer-core'
-import { ParsedUrlQuery } from 'querystring'
-import { COOL_SITE_NAME } from '../../lib/constants'
+import { GetServerSideProps } from "next";
+import chromium from "chrome-aws-lambda";
+import puppeteer from "puppeteer-core";
+import { ParsedUrlQuery } from "querystring";
+import { COOL_SITE_NAME } from "../../lib/constants";
 
 const Image: React.FC = () => {
-  return <></>
-}
+	return <></>;
+};
 
-type Props = {
-}
+type Props = {};
 
 type Params = ParsedUrlQuery & {
-  params: {
-    title: string
-  }
-}
+	params: {
+		title: string;
+	};
+};
 
-export const getServerSideProps: GetServerSideProps<Props, Params> = async (context) => {
-  const { title } = context.params!
-  const { res } = context;
+export const getServerSideProps: GetServerSideProps<Props, Params> = async (
+	context,
+) => {
+	const { title } = context.params!;
+	const { res } = context;
 
-  if (!title) {
-    res.statusCode = 400
-    res.end('Bad Request')
-    return { props: {} }
-  }
+	if (!title) {
+		res.statusCode = 400;
+		res.end("Bad Request");
+		return { props: {} };
+	}
 
-  const exePath = process.platform === 'win32'
-    ? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
-    : process.platform === 'linux'
-    ? '/usr/bin/google-chrome'
-    : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+	const exePath =
+		process.platform === "win32"
+			? "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+			: process.platform === "linux"
+				? "/usr/bin/google-chrome"
+				: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
-    console.log(exePath)
+	console.log(exePath);
 
-  const options = {
-    development: {
-      args: [],
-      defaultViewport: { width: 1200, height: 630 },
-      executablePath: exePath,
-      headless: true
-    }, // TODO: いったんローカルでの開発は断念した...
-    production: {
-      args: chromium.args,
-      defaultViewport: { width: 1200, height: 630 },
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless,
-    },
-    test: {},
-  }[process.env.NODE_ENV];
+	const options = {
+		development: {
+			args: [],
+			defaultViewport: { width: 1200, height: 630 },
+			executablePath: exePath,
+			headless: true,
+		}, // TODO: いったんローカルでの開発は断念した...
+		production: {
+			args: chromium.args,
+			defaultViewport: { width: 1200, height: 630 },
+			executablePath: await chromium.executablePath,
+			headless: chromium.headless,
+		},
+		test: {},
+	}[process.env.NODE_ENV];
 
-  console.log(options)
+	console.log(options);
 
-  const browser = await puppeteer.launch(options)
+	const browser = await puppeteer.launch(options);
 
-  const html = `<html>
+	const html = `<html>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,17 +138,20 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async (cont
           <p class="site-name">${COOL_SITE_NAME}</p>
         </div>
       </body>
-    </html>`
+    </html>`;
 
-  const page = await browser.newPage()
-  await page.setContent(html)
-  const buffer = await page.screenshot()
+	const page = await browser.newPage();
+	await page.setContent(html);
+	const buffer = await page.screenshot();
 
-  res.setHeader('Content-Type', 'image/png')
-  res.setHeader('Cache-Control', 'public, immutable, no-transform, s-maxage=31536000, max-age=31536000')
-  res.end(buffer, 'binary')
+	res.setHeader("Content-Type", "image/png");
+	res.setHeader(
+		"Cache-Control",
+		"public, immutable, no-transform, s-maxage=31536000, max-age=31536000",
+	);
+	res.end(buffer, "binary");
 
-  return { props: {} }
-}
+	return { props: {} };
+};
 
-export default Image
+export default Image;
