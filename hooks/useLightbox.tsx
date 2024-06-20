@@ -22,7 +22,7 @@ export default function useLightbox() {
   const renderLightbox = React.useCallback(
     (props?: Omit<LightboxExternalProps, "open" | "close">) =>
       interactive ? (
-        <Lightbox index={index} plugins={[Captions, Counter, Thumbnails, Zoom]} thumbnails={{ border: 0, borderRadius: 0 }} captions={{ descriptionTextAlign: 'center' }} open={open} close={() => setOpen(false)} {...props} />
+        <Lightbox index={index} plugins={[Captions, Counter, Thumbnails, Zoom]} thumbnails={{ border: 0, borderRadius: 0 }} captions={{ descriptionTextAlign: 'center' }} styles={{ root: { "--yarl__color_backdrop": "rgba(0, 0, 0, .95)" } }} open={open} close={() => setOpen(false)} {...props} />
       ) : null,
     [index, open, interactive]
   );
