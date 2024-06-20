@@ -79,7 +79,7 @@ const Work: NextPage<Props> = ({ work }) => {
 								{description}
 							</p>
 							<div className="flex flex-wrap mt-4 mb-6 space-x-4">
-								{used.map((name, idx) => (
+								{used.map((name) => (
 									<p
 										key={name}
 										className="px-[8px] py-[4px] mb-2 text-gray-700 border border-gray-400 dark:text-light-300 dark:border-gray-500"
