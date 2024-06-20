@@ -22,6 +22,8 @@ import { h } from "hastscript";
 import type { NextPage } from "next";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCodeTitles from "rehype-code-titles";
+import rehypeMdxCodeProps from 'rehype-mdx-code-props'
+import rehypeMdxImportMedia from 'rehype-mdx-import-media'
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import remarkDirective from "remark-directive";
@@ -134,6 +136,8 @@ export async function getStaticProps({ params }: Params) {
 				rehypeCodeTitles,
 				rehypePrismPlus,
 				rehypeAutolinkHeadings,
+				rehypeMdxImportMedia,
+				rehypeMdxCodeProps
 			];
 
 			return options;

@@ -1,7 +1,13 @@
 {
+	"extends": "@tsconfig/next/tsconfig.json",
 	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"contentlayer/generated": ["./.contentlayer/generated"]
+		},
 		"target": "es5",
-		"module": "esnext",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 		"jsx": "preserve",
 		"strict": true,
 		"esModuleInterop": true,
@@ -10,11 +16,16 @@
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"noEmit": true,
-		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"incremental": true
 	},
 	"exclude": ["node_modules"],
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "scripts/darkMode.js"]
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"scripts/darkMode.js",
+		".contentlayer/generated"
+, "contentlayer.config.mts"	]
 }

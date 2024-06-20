@@ -1,5 +1,5 @@
-import Author from "./author";
-import { BundleMDXReturn } from "./bundleMDX";
+import type Author from "./author";
+import type { BundleMDXReturn } from "./bundleMDX";
 
 type PostType = {
 	slug: string;

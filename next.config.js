@@ -1,11 +1,7 @@
-// Reference: https://github.com/vercel/next.js/issues/7755#issuecomment-812805708
-module.exports = {
-	webpack: (config, { isServer }) => {
-		if (!isServer) {
-			config.resolve.fallback.fs = false;
-		}
-		return config;
-	},
+const { withContentlayer } = require('next-contentlayer')
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
 	images: {
 		remotePatterns: [
 			{
@@ -17,5 +13,7 @@ module.exports = {
 				hostname: 'pbs.twimg.com',
 			},
 		],
-	},
+	}
 };
+
+module.exports = withContentlayer(nextConfig)
