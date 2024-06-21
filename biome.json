@@ -3,6 +3,13 @@
 	"organizeImports": {
 		"enabled": true
 	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single",
+			"jsxQuoteStyle": "single",
+			"trailingCommas": "all"
+		}
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {

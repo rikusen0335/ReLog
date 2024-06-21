@@ -6,8 +6,8 @@
 			"contentlayer/generated": ["./.contentlayer/generated"]
 		},
 		"target": "es5",
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
+		"module": "esnext",
+		"moduleResolution": "node",
 		"jsx": "preserve",
 		"strict": true,
 		"esModuleInterop": true,
@@ -27,5 +27,5 @@
 		"**/*.tsx",
 		"scripts/darkMode.js",
 		".contentlayer/generated"
-, "contentlayer.config.mts"	]
+	]
 }
