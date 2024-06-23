@@ -24,8 +24,7 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "incremental": true,
-    "resolvePackageJsonExports": false, // https://zenn.dev/drop_table_user/articles/710c34c9f7c4b0
+    "incremental": true
   },
   "exclude": [
     "node_modules"

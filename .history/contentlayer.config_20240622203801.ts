@@ -31,9 +31,9 @@ export const Post = defineDocumentType(() => ({
 	name: "Post",
 	filePathPattern: "**/*.md",
 	fields: {
-    slug: { type: "string", required: true }, // TODO: ハイフンと小文字と数字しか使えないみたいなvalidationを追加したい
+    slug: { type: "string", required: true },
 		title: { type: "string", required: true },
-		publishedDate: { type: "date", required: true, default: new Date().toISOString() },
+		publishedDate: { type: "date", required: true },
     author: { type: "nested", required: true, of: Author },
     excerpt: { type: "string", required: true },
     tags: { type: "list", of: { type: "string" } },

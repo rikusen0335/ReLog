@@ -1,5 +1,5 @@
 import cx from "classnames";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 
 type Props = {

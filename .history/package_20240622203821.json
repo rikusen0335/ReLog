@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"dev": "next dev -p 3112",
+		"dev": "PORT=3112 next dev",
 		"build": "next build",
 		"start": "next start",
 		"typecheck": "tsc"
