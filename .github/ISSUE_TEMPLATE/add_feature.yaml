@@ -12,4 +12,4 @@ body:
     id: affects
     attributes:
       label: この機能が影響を与える可能性のある機能を書いてください
-      value: "なし"
+      value: "-\n-\n-"
