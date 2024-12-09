@@ -1,0 +1,15 @@
+﻿name: 機能追加
+description: 追加したい機能の詳細を書いてください。
+title: "[Feature]: "
+assignees:
+  - rikusen0335
+body:
+  - type: textarea
+    id: title
+    attributes:
+      label: 機能について詳細に書いてください
+  - type: textarea
+    id: affects
+    attributes:
+      label: この機能が影響を与える可能性のある機能を書いてください
+      value: "なし"
