@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   },
 };
 
+const hoge = "fuga"
+
 export default function RootLayout({
   children,
 }: {
