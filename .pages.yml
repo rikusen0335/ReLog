@@ -28,6 +28,8 @@ content:
         type: reference
         options:
           collection: authors
+          value: "{name}"
+          label: "{name}"
       - name: tags
         label: タグ
         type: reference
