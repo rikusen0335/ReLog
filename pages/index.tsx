@@ -80,6 +80,12 @@ export const getStaticProps = async () => {
 
     delete post["publish-date"];
     delete post["update-date"];
+
+    post.coverImage = post["cover-image"] ?? null;
+    post.excerpt = post.excerpt ?? null;
+    post.tags = post.tags ?? null;
+    post.public = post.public ?? null;
+    delete post["cover-image"];
   });
 
   return {

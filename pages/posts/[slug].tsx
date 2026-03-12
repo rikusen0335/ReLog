@@ -201,6 +201,7 @@ export async function getStaticProps({ params }: Params) {
 
   delete post["publish-date"];
   delete post["update-date"];
+  delete post["cover-image"];
 
   return {
     props: {
@@ -208,6 +209,7 @@ export async function getStaticProps({ params }: Params) {
         ...post,
         publishDate,
         updateDate,
+        coverImage: post["cover-image"] ?? null,
         content,
         rawContent,
         ogImage: {
