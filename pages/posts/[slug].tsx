@@ -196,13 +196,11 @@ export async function getStaticProps({ params }: Params) {
     test: DEVELOP_SITE_URL, // 使わないけど
   }[process.env.NODE_ENV];
 
-  console.log(post);
+  const publishDate = getISODateStringOrNull(post["publish-date"]);
+  const updateDate = getISODateStringOrNull(post["update-date"]);
 
   delete post["publish-date"];
   delete post["update-date"];
-
-  const publishDate = getISODateStringOrNull(post["publish-date"]);
-  const updateDate = getISODateStringOrNull(post["update-date"]);
 
   return {
     props: {

@@ -74,9 +74,9 @@ export const getStaticProps = async () => {
 
   allPosts.forEach((post) => {
     // @ts-ignore
-    post.publishDate = getISODateStringOrNull(post.publishDate);
+    post.publishDate = getISODateStringOrNull(post["publish-date"]);
     // @ts-ignore
-    post.updatedDate = getISODateStringOrNull(post.updatedDate);
+    post.updatedDate = getISODateStringOrNull(post["update-date"]);
 
     delete post["publish-date"];
     delete post["update-date"];

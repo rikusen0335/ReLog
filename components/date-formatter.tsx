@@ -5,7 +5,6 @@ type Props = {
 };
 
 const DateFormatter = ({ dateString }: Props) => {
-  console.log("DateFormatter received dateString:", dateString);
   const date = parseISO(dateString);
   return (
     <time className="text-base dark:text-light-200" dateTime={dateString}>
