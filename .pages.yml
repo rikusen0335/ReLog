@@ -39,6 +39,7 @@ content:
     label: 著者
     path: _contents/authors
     type: collection
+    format: json
     fields:
       - name: name
         label: 名前
