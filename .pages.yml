@@ -37,10 +37,8 @@ content:
       - { name: body, label: 本文, type: rich-text, required: true }
   - name: authors
     label: 著者
-    path: _contents/authors
+    path: _contents/authors/authors.json
     type: file
-    format: json
-    filename: 'authors.json'
     fields:
       - name: name
         label: 名前
