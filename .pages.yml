@@ -25,11 +25,10 @@ content:
       - name: authors
         label: 著者
         required: true
-        type: reference
+        type: select
         options:
-          collection: authors
-          value: "{name}"
-          label: "{name}"
+          values:
+            - rikusen0335
       - name: tags
         label: タグ
         type: reference
