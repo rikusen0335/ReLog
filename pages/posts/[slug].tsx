@@ -34,6 +34,10 @@ import remarkGfm from "remark-gfm";
 // コードフェンスのメタ文字列 `hl="1-4"` を pre 要素の dataLine プロパティに変換する。
 // MDXソースの前処理で {1-4} → hl="1-4" に変換済みのものをここで処理する。
 // rehype-prism-plus は pre.properties.dataLine を読んでラインハイライトを行う。
+// ソース前処理で {1-4} → hl="1-4" に変換済みのメタ文字列を処理する。
+// rehype-prism-plus は code.data.meta の {1-4} パターンを読んでハイライトするため、
+// hl="1-4" を {1-4} 形式に戻して code.data.meta にセットし、
+// metastring からは除去することで rehype-mdx-code-props の JSX パースエラーを防ぐ。
 function rehypeHighlightToDataLine() {
   return (tree: any) => {
     visit(tree, "element", (node: any) => {
@@ -42,11 +46,32 @@ function rehypeHighlightToDataLine() {
       if (!codeEl?.properties?.metastring) return;
       const match = codeEl.properties.metastring.match(/hl="([\d,\s-]+)"/);
       if (!match) return;
-      node.properties = node.properties || {};
-      node.properties.dataLine = match[1].trim();
+      codeEl.data = codeEl.data || {};
+      codeEl.data.meta = `{${match[1].trim()}}`;
       codeEl.properties.metastring = codeEl.properties.metastring
         .replace(/hl="[\d,\s-]+"/, "")
         .trim();
+    });
+  };
+}
+
+// 画像のみを含む <p> を unwrap する（rehype-unwrap-images が ESM only のためインライン実装）。
+// react-medium-image-zoom の Zoom が <div> をレンダリングするため、
+// <p><div>...</div></p> という無効なHTML構造を防ぐ。
+function rehypeUnwrapImages() {
+  return (tree: any) => {
+    visit(tree, "element", (node: any, index: number | null, parent: any) => {
+      if (node.tagName !== "p" || index == null) return;
+      const isOnlyImages = node.children.every(
+        (child: any) =>
+          child.tagName === "img" ||
+          (child.type === "text" && child.value.trim() === "") ||
+          child.tagName === "br",
+      );
+      if (isOnlyImages) {
+        const images = node.children.filter((c: any) => c.tagName === "img");
+        parent.children.splice(index, 1, ...images);
+      }
     });
   };
 }
@@ -155,9 +180,10 @@ export async function getStaticProps({ params }: Params) {
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
         rehypeSlug,
+        rehypeUnwrapImages,
         rehypeCodeTitles,
-        rehypePrismPlus,
         rehypeHighlightToDataLine,
+        rehypePrismPlus,
         rehypeMdxCodeProps,
         rehypeAutolinkHeadings,
         rehypeMdxImportMedia,
