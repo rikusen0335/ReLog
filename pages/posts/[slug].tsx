@@ -16,6 +16,7 @@ import {
   PRODUCTION_SITE_URL,
   SITE_NAME,
 } from "../../lib/constants";
+import { visit } from "unist-util-visit";
 import type PostType from "../../types/post";
 const remarkHint = require("remark-hint"); // TODO: あとでremark-directiveで置き換える
 import type { NextPage } from "next";
@@ -25,52 +26,22 @@ import rehypeMdxCodeProps from "rehype-mdx-code-props";
 import rehypeMdxImportMedia from "rehype-mdx-import-media";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
-import { visit } from "unist-util-visit";
 import remarkDirective from "remark-directive";
 import remarkDirectiveRehype from "remark-directive-rehype";
-// import rehypeShiki from "@leafac/rehype-shiki";
 import remarkGfm from "remark-gfm";
 
-// コードフェンスのメタ文字列 `hl="1-4"` を pre 要素の dataLine プロパティに変換する。
-// MDXソースの前処理で {1-4} → hl="1-4" に変換済みのものをここで処理する。
-// rehype-prism-plus は pre.properties.dataLine を読んでラインハイライトを行う。
-// ソース前処理で {1-4} → hl="1-4" に変換済みのメタ文字列を処理する。
-// rehype-prism-plus は code.data.meta の {1-4} パターンを読んでハイライトするため、
-// hl="1-4" を {1-4} 形式に戻して code.data.meta にセットし、
-// metastring からは除去することで rehype-mdx-code-props の JSX パースエラーを防ぐ。
-function rehypeHighlightToDataLine() {
+// rehype-prism-plus が {1-4} / showLineNumbers を処理した後に、
+// rehype-mdx-code-props が JSX として解釈できない {1-4} を data.meta から除去する。
+function rehypeCleanCodeMeta() {
   return (tree: any) => {
     visit(tree, "element", (node: any) => {
-      if (node.tagName !== "pre") return;
-      const codeEl = node.children?.find((c: any) => c.tagName === "code");
-      if (!codeEl?.properties?.metastring) return;
-      const match = codeEl.properties.metastring.match(/hl="([\d,\s-]+)"/);
-      if (!match) return;
-      codeEl.data = codeEl.data || {};
-      codeEl.data.meta = `{${match[1].trim()}}`;
-      codeEl.properties.metastring = codeEl.properties.metastring
-        .replace(/hl="[\d,\s-]+"/, "")
-        .trim();
-    });
-  };
-}
-
-// 画像のみを含む <p> を unwrap する（rehype-unwrap-images が ESM only のためインライン実装）。
-// react-medium-image-zoom の Zoom が <div> をレンダリングするため、
-// <p><div>...</div></p> という無効なHTML構造を防ぐ。
-function rehypeUnwrapImages() {
-  return (tree: any) => {
-    visit(tree, "element", (node: any, index: number | null, parent: any) => {
-      if (node.tagName !== "p" || index == null) return;
-      const isOnlyImages = node.children.every(
-        (child: any) =>
-          child.tagName === "img" ||
-          (child.type === "text" && child.value.trim() === "") ||
-          child.tagName === "br",
-      );
-      if (isOnlyImages) {
-        const images = node.children.filter((c: any) => c.tagName === "img");
-        parent.children.splice(index, 1, ...images);
+      if (node.tagName !== "code") return;
+      if (typeof node.data?.meta !== "string") return;
+      const cleaned = node.data.meta.replace(/\{[\d,\s-]+\}/g, "").trim();
+      if (cleaned) {
+        node.data.meta = cleaned;
+      } else {
+        delete node.data.meta;
       }
     });
   };
@@ -159,14 +130,8 @@ export async function getStaticProps({ params }: Params) {
   ]);
 
   const rawContent = post.content || "";
-  // MDXパーサーが {1-4} をJSX式として解釈するのを防ぐため、
-  // コードフェンスのメタ文字列内の {lines} を hl="lines" に変換する
-  const processedContent = post.content.replace(
-    /(^```+\s*\S[^\n{]*)\{([\d,\s-]+)\}/gm,
-    '$1hl="$2"',
-  );
   const content = await bundleMDX({
-    source: processedContent,
+    source: rawContent,
     cwd: resolve(process.cwd(), `/_contents/posts/${post.slug}`),
     mdxOptions: (options) => {
       options.remarkPlugins = [
@@ -180,13 +145,12 @@ export async function getStaticProps({ params }: Params) {
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
         rehypeSlug,
-        rehypeUnwrapImages,
         rehypeCodeTitles,
-        rehypeHighlightToDataLine,
         rehypePrismPlus,
-        rehypeMdxCodeProps,
         rehypeAutolinkHeadings,
         rehypeMdxImportMedia,
+        rehypeCleanCodeMeta,
+        rehypeMdxCodeProps,
       ];
 
       return options;
