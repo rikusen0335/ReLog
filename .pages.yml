@@ -1,12 +1,12 @@
 media:
   - name: files
     label: ファイル
-    input: public/files/documents
+    input: public/assets/documents
     output: /files/documents
     categories: [ document ]
   - name: images # Note: 'name' key is required here
     label: 画像
-    input: public/files/images
+    input: public/assets/images
     output: /files/images
     extensions: [ png, webp ]
 content:
