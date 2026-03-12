@@ -43,4 +43,4 @@ content:
         type: string
       - name: picture
         label: アイコン
-        type: string
+        type: image
