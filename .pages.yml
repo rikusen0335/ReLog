@@ -24,6 +24,7 @@ content:
       - { name: public, label: 公開する, type: boolean, default: true }
       - name: authors
         label: 著者
+        required: true
         type: reference
         options:
           collection: authors
