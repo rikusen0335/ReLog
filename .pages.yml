@@ -3,7 +3,7 @@ media:
     label: 画像
     input: public/assets/images
     output: /files/images
-    extensions: [ png, webp ]
+    extensions: [ png, jpg, jpeg, svg, webp ]
   - name: files
     label: ファイル
     input: public/assets/documents
