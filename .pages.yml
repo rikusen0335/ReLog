@@ -14,7 +14,6 @@ content:
     label: 記事
     path: _contents/posts
     type: collection
-    subfolders: true
     filename: index.mdx
     fields:
       - { name: title, label: タイトル, type: string, required: true }
