@@ -3,32 +3,50 @@ media:
     label: 画像
     input: public/assets/images
     output: /files/images
-    extensions: [ png, jpg, jpeg, gif, svg, webp ]
+    extensions: [png, jpg, jpeg, gif, svg, webp]
   - name: files
     label: ファイル
     input: public/assets/documents
     output: /files/documents
-    categories: [ document ]
+    categories: [document]
 content:
   - name: posts
     label: 記事
     path: _contents/posts
     type: collection
-    filename: '{year}-{month}-{day}-{primary}.mdx'
+    filename: "{year}-{month}-{day}-{primary}.mdx"
     fields:
       - { name: cover-image, label: カバー画像, type: image, required: false }
       - { name: title, label: タイトル, type: string, required: true }
       - { name: excerpt, label: 短文説明, type: string, required: false }
-      - { name: publish-date, label: 投稿日時, type: date, required: true, options: { time: true, format: yyyy-MM-dd'T'HH:mm:ss'+09:00'} }
-      - { name: update-date, label: 更新日時, type: date, required: false, options: { time: true, format: yyyy-MM-dd'T'HH:mm:ss'+09:00'} }
+      - {
+          name: publish-date,
+          label: 投稿日時,
+          type: date,
+          required: true,
+          options: { time: true, format: yyyy-MM-dd'T'HH:mm:ss'+09:00' },
+        }
+      - {
+          name: update-date,
+          label: 更新日時,
+          type: date,
+          required: false,
+          options: { time: true, format: yyyy-MM-dd'T'HH:mm:ss'+09:00' },
+        }
       - { name: public, label: 公開する, type: boolean, default: true }
-      - name: authors
+      - name: author
         label: 著者
         required: true
-        type: select
-        options:
-          values:
-            - rikusen0335
+        type: object
+        fields:
+          - name: name
+            label: 名前
+            type: string
+          - name: picture
+            label: アイコン
+            type: image
+            options:
+              media: images
       - name: tags
         label: タグ
         type: string
