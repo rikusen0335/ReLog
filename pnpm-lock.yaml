@@ -14,9 +14,6 @@ importers:
       classnames:
         specifier: 2.3.1
         version: 2.3.1
-      contentlayer:
-        specifier: ^0.3.4
-        version: 0.3.4(esbuild@0.21.5)
       date-fns:
         specifier: 2.21.3
         version: 2.21.3
