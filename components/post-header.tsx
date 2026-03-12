@@ -4,7 +4,7 @@ import CoverImage from "./cover-image";
 import PostTitle from "./post-title";
 import Author from "../types/author";
 import Tag from "./tag";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 type Props = {
 	title: string;

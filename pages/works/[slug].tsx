@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import ErrorPage from "next/error";
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { FaGithub } from "react-icons/fa";
 import Container from "../../components/container";
