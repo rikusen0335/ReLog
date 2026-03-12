@@ -17,6 +17,9 @@ importers:
       date-fns:
         specifier: 2.21.3
         version: 2.21.3
+      esbuild:
+        specifier: ^0.27.3
+        version: 0.27.3
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -60,8 +63,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       rehype-mdx-import-media:
-        specifier: ^1.2.0
-        version: 1.2.0
+        specifier: ^1.4.0
+        version: 1.4.0
       rehype-prism-plus:
         specifier: ^1.1.1
         version: 1.6.3
@@ -96,8 +99,8 @@ importers:
         specifier: ^10.0.1
         version: 10.1.0
       yet-another-react-lightbox:
-        specifier: ^3.20.0
-        version: 3.20.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^3.29.1
+        version: 3.29.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.8.1
@@ -1357,8 +1360,8 @@ packages:
   hast-util-parse-selector@4.0.0:
     resolution: {integrity: sha512-wkQCkSYoOGCRKERFWcxMVMOcYE2K1AaNLU8DXS9arxnLOUEWbOXKXiJUNzEpqZ3JOKpnha3jkFrumEjVliDe7A==}
 
-  hast-util-properties-to-mdx-jsx-attributes@1.0.0:
-    resolution: {integrity: sha512-MZEdAYiXC8wDBfntAc7syyWHbcg/X1h03DQ7IQ6MKagMttpYhnKqOZR/nia0657Dt2v2vuXB8YuKNExw0Fljew==}
+  hast-util-properties-to-mdx-jsx-attributes@1.1.1:
+    resolution: {integrity: sha512-MMrAoGgvhYULEqMB/r6AlcVz1D3Cyml/9cMB2NIqZsIsEJ+XEXPMqH0gjba8dVs9AnQUYvPReAS+OIYx4ip+Ug==}
 
   hast-util-sanitize@3.0.2:
     resolution: {integrity: sha512-+2I0x2ZCAyiZOO/sb4yNLFmdwPBnyJ4PBkVTUMKMqBwYNA+lXSgOmoRXlJFazoyid9QPogRRKgKhVEodv181sA==}
@@ -2357,8 +2360,8 @@ packages:
   rehype-mdx-code-props@3.0.0:
     resolution: {integrity: sha512-Nw8gFlrc51tK+5jz9XhI31J6lniGLpgyM0xIYteDHWEx0rlqosguVMasSMiQXkjov19j66mP9fgl09iCV+AYTA==}
 
-  rehype-mdx-import-media@1.2.0:
-    resolution: {integrity: sha512-rf+2qnPv3LTqLtCr8GjhHUja2TEbmwWtD1o4jigrmGWbVDggOMxyNeqJhGpC4E3vtH+sY+a+u9WPSEaskEWPFA==}
+  rehype-mdx-import-media@1.4.0:
+    resolution: {integrity: sha512-O2Q/yFj8lj0IXK7iwfHFowYrn0c5wA4/RCoS8J30HVioMmMzr+fF82PbxV3YPf6IpmbaRrVPvRfae1LhM8hXmQ==}
 
   rehype-parse@8.0.5:
     resolution: {integrity: sha512-Ds3RglaY/+clEX2U2mHflt7NlMA72KspZ0JLUJgBBLpRddBcEw3H8uYZQliQriku22NZpYMfjDdSgHcjxue24A==}
@@ -3031,12 +3034,19 @@ packages:
   yauzl@2.10.0:
     resolution: {integrity: sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g==}
 
-  yet-another-react-lightbox@3.20.0:
-    resolution: {integrity: sha512-Ty0yrqfVJ5XVq0gr1EmN31Ng5gkjC79RePrtzqGi/Xn+erwiuzEDTmKqbO9pDqrfb05xfow2NwWcp3auk4RVuQ==}
+  yet-another-react-lightbox@3.29.1:
+    resolution: {integrity: sha512-0cpa+wlleiy2cWNjS9qrcY0+SgZQH/4PDx2uupLMI9Ofip1f7pCgZ95PlVp/EsFsO4ufwOTea51bkLhcEXJJSg==}
     engines: {node: '>=14'}
     peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
+      '@types/react': ^16 || ^17 || ^18 || ^19
+      '@types/react-dom': ^16 || ^17 || ^18 || ^19
+      react: ^16.8.0 || ^17 || ^18 || ^19
+      react-dom: ^16.8.0 || ^17 || ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
 
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
@@ -4236,15 +4246,13 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
 
-  hast-util-properties-to-mdx-jsx-attributes@1.0.0:
+  hast-util-properties-to-mdx-jsx-attributes@1.1.1:
     dependencies:
       '@types/estree': 1.0.5
       '@types/hast': 3.0.4
-      comma-separated-tokens: 2.0.3
       estree-util-value-to-estree: 3.1.1
       mdast-util-mdx-jsx: 3.1.2
-      property-information: 6.5.0
-      space-separated-tokens: 2.0.2
+      property-information: 7.1.0
       style-to-js: 1.1.12
     transitivePeerDependencies:
       - supports-color
@@ -5831,10 +5839,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  rehype-mdx-import-media@1.2.0:
+  rehype-mdx-import-media@1.4.0:
     dependencies:
       '@types/hast': 3.0.4
-      hast-util-properties-to-mdx-jsx-attributes: 1.0.0
+      hast-util-properties-to-mdx-jsx-attributes: 1.1.1
       parse-srcset: 1.0.2
       unified: 11.0.5
       unist-util-visit: 5.0.0
@@ -6690,10 +6698,13 @@ snapshots:
       buffer-crc32: 0.2.13
       fd-slicer: 1.1.0
 
-  yet-another-react-lightbox@3.20.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  yet-another-react-lightbox@3.29.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+    optionalDependencies:
+      '@types/react': 18.3.3
+      '@types/react-dom': 18.3.0
 
   zod@3.23.8: {}
 

@@ -1,3 +1,5 @@
+import("yet-another-react-lightbox");
+
 import LightboxComponent, {
   type LightboxExternalProps,
 } from "yet-another-react-lightbox";
