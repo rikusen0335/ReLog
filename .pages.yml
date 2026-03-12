@@ -40,6 +40,7 @@ content:
     path: _contents/authors
     type: collection
     format: json
+    filename: '{year}-{month}-{day}-{primary}.json'
     fields:
       - name: name
         label: 名前
