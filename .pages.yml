@@ -1,0 +1,45 @@
+media:
+  - name: files
+    label: ファイル
+    input: public/files/documents
+    output: /files/documents
+    categories: [ document ]
+  - name: images # Note: 'name' key is required here
+    label: 画像
+    input: public/files/images
+    output: /files/images
+    extensions: [ png, webp ]
+content:
+  - name: posts
+    label: 記事
+    path: _contents/posts
+    type: collection
+    fields:
+      - { name: title, label: タイトル, type: string, required: true }
+      - { name: excerpt, label: 短文説明, type: string, required: false }
+      - { name: publish-date, label: 投稿日時, type: date, required: true, options: { time: true, format: yyyy-MM-dd'T'HH:mm:ss'+09:00'} }
+      - { name: update-date, label: 更新日時, type: date, required: false, options: { time: true, format: yyyy-MM-dd'T'HH:mm:ss'+09:00'} }
+      - { name: body, label: 本文, type: rich-text, required: true }
+      - { name: tags, label: タグ, type: string, required: true }
+      - name: authors
+        label: 著者
+        type: reference
+        options:
+          collection: authors
+      - name: tests
+        label: Tests
+        type: reference
+        options:
+          collection: posts
+          multiple: true
+  - name: authors
+    label: 著者
+    path: _contents/authors
+    type: collection
+    fields:
+      - name: name
+        label: 名前
+        type: string
+      - name: picture
+        label: アイコン
+        type: string
