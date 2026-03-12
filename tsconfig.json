@@ -2,6 +2,10 @@
   "extends": "@tsconfig/next/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "types/*": ["./types/*"]
+    },
     "target": "es5",
     "module": "esnext",
     "moduleResolution": "bundler",

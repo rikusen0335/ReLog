@@ -18,7 +18,6 @@ import {
 } from "../../lib/constants";
 import type PostType from "../../types/post";
 const remarkHint = require("remark-hint"); // TODO: あとでremark-directiveで置き換える
-import { h } from "hastscript";
 import type { NextPage } from "next";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCodeTitles from "rehype-code-titles";
@@ -26,10 +25,31 @@ import rehypeMdxCodeProps from "rehype-mdx-code-props";
 import rehypeMdxImportMedia from "rehype-mdx-import-media";
 import rehypePrismPlus from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
+import { visit } from "unist-util-visit";
 import remarkDirective from "remark-directive";
 import remarkDirectiveRehype from "remark-directive-rehype";
 // import rehypeShiki from "@leafac/rehype-shiki";
 import remarkGfm from "remark-gfm";
+
+// コードフェンスのメタ文字列 `hl="1-4"` を pre 要素の dataLine プロパティに変換する。
+// MDXソースの前処理で {1-4} → hl="1-4" に変換済みのものをここで処理する。
+// rehype-prism-plus は pre.properties.dataLine を読んでラインハイライトを行う。
+function rehypeHighlightToDataLine() {
+  return (tree: any) => {
+    visit(tree, "element", (node: any) => {
+      if (node.tagName !== "pre") return;
+      const codeEl = node.children?.find((c: any) => c.tagName === "code");
+      if (!codeEl?.properties?.metastring) return;
+      const match = codeEl.properties.metastring.match(/hl="([\d,\s-]+)"/);
+      if (!match) return;
+      node.properties = node.properties || {};
+      node.properties.dataLine = match[1].trim();
+      codeEl.properties.metastring = codeEl.properties.metastring
+        .replace(/hl="[\d,\s-]+"/, "")
+        .trim();
+    });
+  };
+}
 
 type Props = {
   post: PostType;
@@ -114,8 +134,14 @@ export async function getStaticProps({ params }: Params) {
   ]);
 
   const rawContent = post.content || "";
+  // MDXパーサーが {1-4} をJSX式として解釈するのを防ぐため、
+  // コードフェンスのメタ文字列内の {lines} を hl="lines" に変換する
+  const processedContent = post.content.replace(
+    /(^```+\s*\S[^\n{]*)\{([\d,\s-]+)\}/gm,
+    '$1hl="$2"',
+  );
   const content = await bundleMDX({
-    source: post.content,
+    source: processedContent,
     cwd: resolve(process.cwd(), `/_contents/posts/${post.slug}`),
     mdxOptions: (options) => {
       options.remarkPlugins = [
@@ -125,16 +151,16 @@ export async function getStaticProps({ params }: Params) {
         remarkGfm,
         remarkDirective,
         remarkDirectiveRehype,
-        // remarkMdxCodeMeta,
       ];
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
         rehypeSlug,
         rehypeCodeTitles,
         rehypePrismPlus,
+        rehypeHighlightToDataLine,
+        rehypeMdxCodeProps,
         rehypeAutolinkHeadings,
         rehypeMdxImportMedia,
-        rehypeMdxCodeProps,
       ];
 
       return options;
