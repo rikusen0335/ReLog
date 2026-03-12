@@ -46,3 +46,16 @@ content:
         type: image
         options:
           media: images
+  - name: tags
+    label: タグ
+    path: _contents/tags
+    type: collection
+    fields:
+      - name: name
+        label: 名前
+        type: string
+      - name: picture
+        label: アイコン
+        type: image
+        options:
+          media: images
