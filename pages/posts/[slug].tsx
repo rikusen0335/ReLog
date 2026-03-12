@@ -96,7 +96,7 @@ const Post: NextPage<Props> = ({ post, morePosts, preview }) => {
               <PostHeader
                 title={post.title}
                 coverImage={post.coverImage}
-                date={post.date}
+                publishDate={post.publishDate}
                 author={post.author}
                 tags={post.tags}
               />
@@ -117,16 +117,32 @@ type Params = {
   };
 };
 
+function getISODateStringOrNull(date: any): string | null {
+  if (!date) return null;
+  if (typeof date === "string") {
+    const parsed = Date.parse(date);
+    if (isNaN(parsed)) {
+      return null;
+    }
+    return new Date(parsed).toISOString();
+  }
+  if (date instanceof Date) {
+    return date.toISOString();
+  }
+  return null;
+}
+
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, [
     "title",
-    "date",
+    "publish-date",
+    "update-date",
     "slug",
     "author",
     "content",
     "tags",
-    "ogImage",
-    "coverImage",
+    "og-image",
+    "cover-image",
   ]);
 
   const rawContent = post.content || "";
@@ -180,10 +196,20 @@ export async function getStaticProps({ params }: Params) {
     test: DEVELOP_SITE_URL, // 使わないけど
   }[process.env.NODE_ENV];
 
+  console.log(post);
+
+  delete post["publish-date"];
+  delete post["update-date"];
+
+  const publishDate = getISODateStringOrNull(post["publish-date"]);
+  const updateDate = getISODateStringOrNull(post["update-date"]);
+
   return {
     props: {
       post: {
         ...post,
+        publishDate,
+        updateDate,
         content,
         rawContent,
         ogImage: {
