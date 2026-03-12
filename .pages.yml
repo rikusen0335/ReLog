@@ -14,6 +14,7 @@ content:
     label: 記事
     path: _contents/posts
     type: collection
+    filename: '{year}-{month}-{day}-{primary}.mdx'
     fields:
       - { name: title, label: タイトル, type: string, required: true }
       - { name: excerpt, label: 短文説明, type: string, required: false }
