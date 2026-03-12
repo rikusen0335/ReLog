@@ -31,10 +31,9 @@ content:
             - rikusen0335
       - name: tags
         label: タグ
-        type: reference
+        type: string
         options:
-          collection: tags
-          multiple: true
+          list: true
       - { name: body, label: 本文, type: rich-text, required: true }
   - name: authors
     label: 著者
