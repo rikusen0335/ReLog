@@ -38,9 +38,9 @@ content:
   - name: authors
     label: 著者
     path: _contents/authors
-    type: collection
+    type: file
     format: json
-    filename: '{year}-{month}-{day}-{primary}.json'
+    filename: 'authors.json'
     fields:
       - name: name
         label: 名前
