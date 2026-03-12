@@ -198,6 +198,7 @@ export async function getStaticProps({ params }: Params) {
 
   const publishDate = getISODateStringOrNull(post["publish-date"]);
   const updateDate = getISODateStringOrNull(post["update-date"]);
+  const coverImage = post["cover-image"] ?? null;
 
   delete post["publish-date"];
   delete post["update-date"];
@@ -209,7 +210,7 @@ export async function getStaticProps({ params }: Params) {
         ...post,
         publishDate,
         updateDate,
-        coverImage: post["cover-image"] ?? null,
+        coverImage,
         content,
         rawContent,
         ogImage: {

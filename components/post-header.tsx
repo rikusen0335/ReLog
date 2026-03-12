@@ -8,7 +8,7 @@ import Image from "next/legacy/image";
 
 type Props = {
   title: string;
-  coverImage: string;
+  coverImage: string | null;
   publishDate: string;
   author: Author;
   tags?: string[];
@@ -35,16 +35,18 @@ const PostHeader = ({
         </div>
         <DateFormatter dateString={publishDate} />
       </div>
-      <div className="mb-8 text-center md:mb-16 sm:mx-0">
-        <div className="imageContainer">
-          <Image
-            src={coverImage}
-            alt={`Cover Image for ${title}`}
-            className="image"
-            layout="fill"
-          />
+      {coverImage && (
+        <div className="mb-8 text-center md:mb-16 sm:mx-0">
+          <div className="imageContainer">
+            <Image
+              src={coverImage}
+              alt={`Cover Image for ${title}`}
+              className="image"
+              layout="fill"
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="max-w-2xl mx-auto">
         <div className="block mb-6 md:hidden">
           <Avatar name={author.name} picture={author.picture} />
