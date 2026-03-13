@@ -50,8 +50,7 @@ content:
       - name: tags
         label: タグ
         type: string
-        options:
-          list: true
+        list: true
       - { name: body, label: 本文, type: rich-text, required: true }
   - name: authors
     label: 著者
