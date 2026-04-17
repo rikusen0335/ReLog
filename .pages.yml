@@ -2,12 +2,12 @@ media:
   - name: images # Note: 'name' key is required here
     label: 画像
     input: public/assets/images
-    output: /files/images
+    output: /assets/images
     extensions: [png, jpg, jpeg, gif, svg, webp]
   - name: files
     label: ファイル
     input: public/assets/documents
-    output: /files/documents
+    output: /assets/documents
     categories: [document]
 content:
   - name: posts
