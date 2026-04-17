@@ -15,25 +15,23 @@ tags:
 
 Reactには、いくつかの、デファクトスタンダードとなっているコンポーネントデザインパターンが存在する。 その一つが、Atomic Design。
 
-:::tips うんちっぷすｗ :::
+:::tips
+うんちっぷすｗ
+:::
 
 Atomic Designとは、科学の「原子」をもとに考えられた概念で、コンポーネントごとに
 
 - Atom (原子)
-
 - Molecule (分子)
-
 - Organism (有機体)
-
 - Template
-
 - Page
 
 のように分けられる。
 
 ここで、以下のようなコンポーネントを用意してみる。
 
-```tsx:root/src/components/test.mdx
+```tsx:root/src/components/test.mdx {1-4} showLineNumbers
 // Props are always good to define
 type Props = {
   imageUrl: string;
@@ -48,7 +46,7 @@ const Avatar: VFC<Props> = ({ imageUrl }) => {
 
 彼らは事実現にその努力論というのの中が含まませない。
 
-```tsx
+```tsx {4} showLineNumbers
 const Component: VFC<Props> = ({ children }) => {
   return (
     <Hoge>

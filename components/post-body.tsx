@@ -58,7 +58,7 @@ const components = {
 		<ul
 			{...props}
 			className={cn(
-				"mb-4 list-disc list-inside dark:text-light-50",
+				"mb-4 list-disc list-outside pl-6 dark:text-light-50",
 				props.className,
 			)}
 		/>
@@ -67,7 +67,7 @@ const components = {
 		<ol
 			{...props}
 			className={cn(
-				"mb-4 list-decimal list-inside dark:text-light-50",
+				"mb-4 list-decimal list-outside pl-6 dark:text-light-50",
 				props.className,
 			)}
 		/>
