@@ -131,3 +131,27 @@ p {
         height: 400px !important;
     }
 }
+
+
+// Match the existing article presentation for EmDash's server-rendered markup.
+.emdash-content {
+  @apply text-gray-800 dark:text-light-200;
+  h1 { @apply mt-8 mb-4 text-4xl leading-snug font-bold border-b pb-2 border-gray-400; }
+  h2 { @apply mt-4 mb-4 text-2xl leading-snug font-bold; }
+  h3, h4, h5, h6 { @apply mt-2 mb-4 text-xl leading-snug; }
+  p { @apply mb-4 text-base leading-8 md:leading-7; }
+  a { @apply text-blue-600 dark:text-blue-400 underline; }
+  ul { @apply mb-4 list-disc list-outside pl-6; }
+  ol { @apply mb-4 list-decimal list-outside pl-6; }
+  blockquote { @apply pl-3 p-2 mx-2 my-2 bg-gray-100 mb-4 border-l-4 border-gray-400 rounded-r-lg dark:bg-portgore-800; }
+  hr { @apply my-12 border-gray-300 dark:border-portgore-600; }
+  figure { @apply my-6; }
+  img { @apply max-w-full h-auto mx-auto; }
+  figcaption { @apply text-sm text-center text-gray-500 mt-2; }
+  table { @apply block overflow-x-auto border-collapse my-4; }
+  th, td { @apply border border-gray-300 dark:border-portgore-500 px-4 py-2; }
+  th { @apply bg-gray-100 dark:bg-portgore-700 text-left; }
+  pre { @apply overflow-x-auto p-4 my-4 rounded-lg bg-[#011627] text-white; }
+  pre code { font-family: Consolas, Monaco, monospace; font-size: .875rem; }
+  .emdash-code-filename { @apply inline-block pt-2 px-4 bg-[#011627] text-white font-mono; }
+}

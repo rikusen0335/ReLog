@@ -1,0 +1,22 @@
+---
+import { sanitizeHref } from "emdash";
+
+interface Props {
+  node: {
+    asset?: { url?: string; _ref?: string };
+    alt?: string;
+    caption?: string;
+    width?: number;
+    height?: number;
+  };
+}
+
+const { node } = Astro.props;
+const src = sanitizeHref(node.asset?.url ?? "");
+---
+{src && (
+  <figure>
+    <img src={src} alt={node.alt || ""} width={node.width} height={node.height} loading="lazy" />
+    {node.caption && <figcaption>{node.caption}</figcaption>}
+  </figure>
+)}

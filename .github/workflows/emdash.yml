@@ -1,0 +1,45 @@
+name: EmDash migration
+on:
+  pull_request:
+  push:
+    branches: [codex/migrate-emdash]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+      ASTRO_TELEMETRY_DISABLED: "1"
+      EMDASH_URL: http://127.0.0.1:4321
+      EMDASH_SITE_URL: http://127.0.0.1:3112
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.3.0
+      - name: Install frontend
+        run: pnpm install --frozen-lockfile
+      - name: Install CMS
+        run: npm --prefix cms ci --no-audit --no-fund
+      - name: Generate test encryption key
+        run: node -e "const {randomBytes}=require('node:crypto'); require('node:fs').appendFileSync(process.env.GITHUB_ENV, 'EMDASH_ENCRYPTION_KEY=emdash_enc_v1_'+randomBytes(32).toString('base64url')+'\n')"
+      - name: Test CMS client
+        run: node --test tests/emdash-client.test.mjs
+      - name: Test migration and public data
+        run: npm --prefix cms test
+      - name: Import existing articles and media
+        run: npm --prefix cms run migrate
+      - name: Check CMS types
+        run: npm --prefix cms run typecheck
+      - name: Build CMS
+        run: npm --prefix cms run build
+      - name: Build frontend
+        run: pnpm build
+      - name: Check CMS and frontend together
+        run: node scripts/smoke-emdash.mjs

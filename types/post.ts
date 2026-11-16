@@ -1,21 +1,16 @@
 import type Author from "./author";
-import type { BundleMDXReturn } from "./bundleMDX";
 
 type PostType = {
   slug: string;
   title: string;
   publishDate: string;
-  updatedDate?: string;
+  updatedDate: string | null;
   coverImage: string;
   author: Author;
   excerpt: string;
-  ogImage: {
-    url: string;
-  };
-  tags?: string[];
-  content: BundleMDXReturn; // TODO: とりあえず
-  rawContent: string;
-  public: boolean;
+  ogImage: { url: string };
+  tags: string[];
+  bodyHtml?: string;
 };
 
 export default PostType;

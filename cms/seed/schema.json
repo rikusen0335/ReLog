@@ -1,0 +1,109 @@
+{
+  "version": "1",
+  "meta": {
+    "name": "ReLog",
+    "description": "ReLogの記事・著者・タグ"
+  },
+  "collections": [
+    {
+      "slug": "posts",
+      "label": "記事",
+      "labelSingular": "記事",
+      "supports": [
+        "drafts",
+        "revisions",
+        "seo"
+      ],
+      "urlPattern": "/posts/{slug}",
+      "titleField": "title",
+      "dateField": "publish_date",
+      "fields": [
+        {
+          "slug": "title",
+          "label": "タイトル",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "content",
+          "label": "本文",
+          "type": "portableText"
+        },
+        {
+          "slug": "excerpt",
+          "label": "短文説明",
+          "type": "text"
+        },
+        {
+          "slug": "cover_image",
+          "label": "カバー画像",
+          "type": "image"
+        },
+        {
+          "slug": "publish_date",
+          "label": "投稿日時",
+          "type": "datetime",
+          "required": true,
+          "indexed": true
+        },
+        {
+          "slug": "update_date",
+          "label": "更新日時",
+          "type": "datetime"
+        },
+        {
+          "slug": "author_name",
+          "label": "著者名",
+          "type": "string",
+          "required": true,
+          "defaultValue": "rikusen0335"
+        },
+        {
+          "slug": "author_picture",
+          "label": "著者アイコン",
+          "type": "image"
+        }
+      ]
+    },
+    {
+      "slug": "authors",
+      "label": "著者",
+      "labelSingular": "著者",
+      "routable": false,
+      "titleField": "name",
+      "supports": [
+        "drafts",
+        "revisions"
+      ],
+      "fields": [
+        {
+          "slug": "name",
+          "label": "名前",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "picture",
+          "label": "アイコン",
+          "type": "image"
+        }
+      ]
+    }
+  ],
+  "taxonomies": [
+    {
+      "name": "tag",
+      "label": "タグ",
+      "labelSingular": "タグ",
+      "hierarchical": false,
+      "collections": [
+        "posts"
+      ],
+      "terms": []
+    }
+  ],
+  "content": {
+    "posts": [],
+    "authors": []
+  }
+}

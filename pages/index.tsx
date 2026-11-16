@@ -45,50 +45,8 @@ const Index: NextPage<Props> = ({ allPosts }) => {
 
 export default Index;
 
-function getISODateStringOrNull(date: any): string | null {
-  if (!date) return null;
-  if (typeof date === "string") {
-    const parsed = Date.parse(date);
-    if (isNaN(parsed)) {
-      return null;
-    }
-    return new Date(parsed).toISOString();
-  }
-  if (date instanceof Date) {
-    return date.toISOString();
-  }
-  return null;
-}
-
-export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
-    "title",
-    "publish-date",
-    "slug",
-    "author",
-    "cover-image",
-    "excerpt",
-    "tags",
-    "public",
-  ]);
-
-  allPosts.forEach((post) => {
-    // @ts-ignore
-    post.publishDate = getISODateStringOrNull(post["publish-date"]);
-    // @ts-ignore
-    post.updatedDate = getISODateStringOrNull(post["update-date"]);
-
-    delete post["publish-date"];
-    delete post["update-date"];
-
-    post.coverImage = post["cover-image"] ?? null;
-    post.excerpt = post.excerpt ?? null;
-    post.tags = post.tags ?? null;
-    post.public = post.public ?? null;
-    delete post["cover-image"];
-  });
-
-  return {
-    props: { allPosts },
-  };
+// Read on every request so new posts and unpublishing do not require a deployment.
+export const getServerSideProps = async ({ res }: { res: import("http").ServerResponse }) => {
+  res.setHeader("Cache-Control", "private, no-store");
+  return { props: { allPosts: await getAllPosts() } };
 };

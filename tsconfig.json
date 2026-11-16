@@ -3,8 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "types/*": ["./types/*"]
+      "@/*": [
+        "./*"
+      ],
+      "types/*": [
+        "./types/*"
+      ]
     },
     "target": "es5",
     "module": "esnext",
@@ -14,15 +18,22 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-    "resolvePackageJsonExports": true // https://zenn.dev/drop_table_user/articles/710c34c9f7c4b0
+    "resolvePackageJsonExports": true
   },
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules",
+    "cms"
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",

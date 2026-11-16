@@ -1,0 +1,32 @@
+{
+  "name": "relog-cms",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1 --port 4321",
+    "build": "astro build",
+    "start": "node --env-file-if-exists=.env scripts/start.mjs",
+    "typecheck": "astro check",
+    "migration:prepare": "node scripts/migrate-pages.mjs",
+    "migrate": "node scripts/migrate-pages.mjs && emdash seed .emdash/seed.json --on-conflict skip",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.1.5",
+    "@astrojs/react": "^7.0.0",
+    "astro": "^7.3.2",
+    "emdash": "1.5.0",
+    "gray-matter": "^4.0.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^6.0.3"
+  }
+}

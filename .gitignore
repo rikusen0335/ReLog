@@ -34,3 +34,8 @@ yarn-error.log*
 .vercel
 
 .history
+
+.env
+.env.*
+!.env.example
+*.tsbuildinfo

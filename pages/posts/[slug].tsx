@@ -1,237 +1,49 @@
-import { resolve } from "path";
-import { bundleMDX } from "mdx-bundler";
-import ErrorPage from "next/error";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import remarkBreaks from "remark-breaks";
 import Container from "../../components/container";
 import Header from "../../components/header";
 import Layout from "../../components/layout";
 import PostBody from "../../components/post-body";
 import PostHeader from "../../components/post-header";
-import PostTitle from "../../components/post-title";
-import { getAllPosts, getPostBySlug } from "../../lib/api";
-import {
-  DEVELOP_SITE_URL,
-  PRODUCTION_SITE_URL,
-  SITE_NAME,
-} from "../../lib/constants";
-import { visit } from "unist-util-visit";
+import { getPostBySlug } from "../../lib/api";
+import { SITE_NAME } from "../../lib/constants";
 import type PostType from "../../types/post";
-const remarkHint = require("remark-hint"); // TODO: あとでremark-directiveで置き換える
-import type { NextPage } from "next";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeCodeTitles from "rehype-code-titles";
-import rehypeMdxCodeProps from "rehype-mdx-code-props";
-import rehypeMdxImportMedia from "rehype-mdx-import-media";
-import rehypePrismPlus from "rehype-prism-plus";
-import rehypeSlug from "rehype-slug";
-import remarkDirective from "remark-directive";
-import remarkDirectiveRehype from "remark-directive-rehype";
-import remarkGfm from "remark-gfm";
 
-// rehype-prism-plus が {1-4} / showLineNumbers を処理した後に、
-// rehype-mdx-code-props が JSX として解釈できない {1-4} を data.meta から除去する。
-function rehypeCleanCodeMeta() {
-  return (tree: any) => {
-    visit(tree, "element", (node: any) => {
-      if (node.tagName !== "code") return;
-      if (typeof node.data?.meta !== "string") return;
-      const cleaned = node.data.meta.replace(/\{[\d,\s-]+\}/g, "").trim();
-      if (cleaned) {
-        node.data.meta = cleaned;
-      } else {
-        delete node.data.meta;
-      }
-    });
-  };
-}
+type Props = { post: PostType };
 
-type Props = {
-  post: PostType;
-  morePosts: PostType[];
-  preview?: boolean;
-};
-
-const Post: NextPage<Props> = ({ post, morePosts, preview }) => {
-  const router = useRouter();
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "";
-
-  if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
-  }
-
-  return (
-    <Layout preview={preview}>
-      <Container>
-        <Header />
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article className="mb-32">
-              <Head>
-                <title>
-                  {post.title} | {SITE_NAME}
-                </title>
-                <meta property="og:title" content={post.title} />
-                <meta property="twitter:title" content={post.title} />
-                <meta property="twitter:text:title" content={post.title} />
-                <meta
-                  property="og:image"
-                  key="ogImage"
-                  content={post.ogImage.url}
-                />
-                <meta
-                  name="twitter:card"
-                  key="twitterCard"
-                  content="summary_large_image"
-                />
-                <meta
-                  name="twitter:image"
-                  key="twitterImage"
-                  content={post.ogImage.url}
-                />
-              </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                publishDate={post.publishDate}
-                author={post.author}
-                tags={post.tags}
-              />
-              <PostBody source={post.content.code} />
-            </article>
-          </>
-        )}
-      </Container>
-    </Layout>
-  );
-};
+const Post: NextPage<Props> = ({ post }) => (
+  <Layout>
+    <Container>
+      <Header />
+      <article className="mb-32">
+        <Head>
+          <title>{post.title} | {SITE_NAME}</title>
+          <meta name="description" content={post.excerpt} />
+          <meta property="og:title" content={post.title} />
+          <meta property="og:description" content={post.excerpt} />
+          <meta property="twitter:title" content={post.title} />
+          <meta property="og:image" key="ogImage" content={post.ogImage.url} />
+          <meta name="twitter:card" key="twitterCard" content="summary_large_image" />
+          <meta name="twitter:image" key="twitterImage" content={post.ogImage.url} />
+        </Head>
+        <PostHeader
+          title={post.title}
+          coverImage={post.coverImage}
+          publishDate={post.publishDate}
+          author={post.author}
+          tags={post.tags}
+        />
+        <PostBody html={post.bodyHtml || ""} />
+      </article>
+    </Container>
+  </Layout>
+);
 
 export default Post;
 
-type Params = {
-  params: {
-    slug: string;
-  };
+export const getServerSideProps: GetServerSideProps<Props> = async ({ params, res }) => {
+  res.setHeader("Cache-Control", "private, no-store");
+  if (typeof params?.slug !== "string") return { notFound: true };
+  const post = await getPostBySlug(params.slug);
+  return post ? { props: { post } } : { notFound: true };
 };
-
-function getISODateStringOrNull(date: any): string | null {
-  if (!date) return null;
-  if (typeof date === "string") {
-    const parsed = Date.parse(date);
-    if (isNaN(parsed)) {
-      return null;
-    }
-    return new Date(parsed).toISOString();
-  }
-  if (date instanceof Date) {
-    return date.toISOString();
-  }
-  return null;
-}
-
-export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
-    "title",
-    "publish-date",
-    "update-date",
-    "slug",
-    "author",
-    "content",
-    "tags",
-    "og-image",
-    "cover-image",
-  ]);
-
-  const rawContent = post.content || "";
-  const content = await bundleMDX({
-    source: rawContent,
-    cwd: resolve(process.cwd(), `/_contents/posts/${post.slug}`),
-    mdxOptions: (options) => {
-      options.remarkPlugins = [
-        ...(options.remarkPlugins ?? []),
-        remarkHint,
-        remarkBreaks,
-        remarkGfm,
-        remarkDirective,
-        remarkDirectiveRehype,
-      ];
-      options.rehypePlugins = [
-        ...(options.rehypePlugins ?? []),
-        rehypeSlug,
-        rehypeCodeTitles,
-        rehypePrismPlus,
-        rehypeAutolinkHeadings,
-        rehypeMdxImportMedia,
-        rehypeCleanCodeMeta,
-        rehypeMdxCodeProps,
-      ];
-
-      return options;
-    },
-    /*
-     * Writes images to public directory
-     * Reference: https://github.com/kentcdodds/mdx-bundler#image-bundling
-     */
-    esbuildOptions: (options) => {
-      options.outdir = resolve(`./public/posts/${post.slug}/images`);
-      options.publicPath = `/posts/${post.slug}/images`;
-      options.loader = {
-        ...options.loader,
-        ".png": "file",
-        ".jpeg": "file",
-        ".jpg": "file",
-      };
-      options.write = true;
-
-      return options;
-    },
-  });
-
-  const baseUrl = {
-    production: PRODUCTION_SITE_URL,
-    development: DEVELOP_SITE_URL,
-    test: DEVELOP_SITE_URL, // 使わないけど
-  }[process.env.NODE_ENV];
-
-  const publishDate = getISODateStringOrNull(post["publish-date"]);
-  const updateDate = getISODateStringOrNull(post["update-date"]);
-  const coverImage = post["cover-image"] ?? null;
-
-  delete post["publish-date"];
-  delete post["update-date"];
-  delete post["cover-image"];
-
-  return {
-    props: {
-      post: {
-        ...post,
-        publishDate,
-        updateDate,
-        coverImage,
-        content,
-        rawContent,
-        ogImage: {
-          url: `${baseUrl}/ogp/${post.title}`,
-        },
-      },
-    },
-  };
-}
-
-export async function getStaticPaths() {
-  const posts = getAllPosts(["slug"]);
-
-  return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          slug: post.slug,
-        },
-      };
-    }),
-    fallback: false,
-  };
-}
